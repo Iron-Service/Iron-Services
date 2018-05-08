@@ -14,23 +14,26 @@ const logInPromise = (user, req) => new Promise((resolve,reject) => {
 
 /* GET home page */
 router.post('/signup', (req, res, next) => {
-    const {username, password} = req.body;
+    const {username, password, email} = req.body;
   
-    if (!username || !password) {
-      res.status(400).json({ message: 'Provide username and password' });
+    if (!username || !password || !email) {
+      res.status(400).json({ message: 'Provide username, email address and password' });
       return;
     }
   
-    User.findOne({ username })
+    User.findOne({$or:[{username},{email}]})
     .then( user => {
-        if(user) throw new Error('The username already exists');
+        if(user.email === email) throw new Error ('The email already exists.. Pero chicooo,,,')
+        if(user.username === username) throw new Error('The username already exists');
         
+
         const salt = bcrypt.genSaltSync(10);
         const hashPass = bcrypt.hashSync(password, salt);
 
         const theUser = new User({
           username,
-          password: hashPass
+          password: hashPass,
+          email
         });
     
         return theUser.save().then( user => logInPromise(user,req));
