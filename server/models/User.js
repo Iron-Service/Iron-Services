@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: {type:String, required},
-  password: {type:String, required},
-  email:{type:String, required},
+  username: {type:String, required:true},
+  password: {type:String, required:true},
+  email:{type:String, required:true},
   direcctions:[ {type:Schema.Types.ObjectId, ref:"Direction"}],
   favorites: [String],
   comments: [{type:Schema.Types.ObjectId, ref:"Comment"}],
@@ -12,10 +12,10 @@ const userSchema = new Schema({
   complaints:[{type:Schema.Types.ObjectId, ref:'Complaint'}],
   messages: {type:Schema.Types.ObjectId, ref:"Message"},
   
-  shop: Boolean,
+  shop: {type:Boolean, default:false},
   shopsList: [{type:Schema.Types.ObjectId, ref:'Shop'}],
 
-  admin: Boolean
+  admin: {type:Boolean, default:false}
   
 }, {
   timestamps: {
