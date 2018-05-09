@@ -92,9 +92,24 @@ const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
 const shopRoutes = require("./routes/shop");
-app.use("/shop", shopRoutes)
+app.use("/shop", shopRoutes);
 
-const messegeRoutes = require("./routes/message");
-app.use("/message", meesegeRoutes);
+const messageRoutes = require("./routes/message");
+app.use("/message", messageRoutes);
+
+const commentRoutes = require("./routes/comment");
+app.use("/comment", commentRoutes);
+
+const appointmentRoutes = require("./routes/appointment");
+app.use("/appointment", appointmentRoutes);
+
+const complaintRoutes = require("./routes/complaint");
+app.use("/complaint", complaintRoutes);
+
+const directionRoutes = require("./routes/direction");
+app.use("/direction", directionRoutes);
+
+const adminRoutes = require("./routes/admin");
+app.use("/admin", adminRoutes);
 
 module.exports = app;
