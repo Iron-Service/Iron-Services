@@ -5,6 +5,7 @@ const Shop = require("../models/Shop");
 const Comment = require("../models/Comment");
 const Appointment = require("../models/Appointment");
 const Message = require("../models/Message");
+const User = require("../models/User")
 
 router.post('/create', (req, res) => {
   const {name, direction, description, serviceType, serviceList } = req.body;
@@ -17,7 +18,7 @@ router.post('/create', (req, res) => {
     Shop.create(shop,(err, arrayShop) => {
       if(err)  return res.status(400).json({message:`Shop ${shop.name} error.`})
       console.log(`Shop ${shop.name} created.`)
-      req.user.update({$push:{shopsList:arrayShop._id}}).then(() => 
+      req.user.update({$push:{shopsList:arrayShop._id}, shop:true}).then(() => 
       res.status(200).json({message:`Shop ${shop.name} created.`}))
     })
   })
@@ -52,15 +53,34 @@ router.put('/:id/update', (req,res) => {
 })
 //Delete shop
 router.delete('/:id/delete', (req,res) => {
+  console.log(req.params.id)
   Shop.findByIdAndRemove(req.params.id)
   .then( shop => {
+    console.log(shop);
+    if(!shop) return res.status(400).json({message:'No such shop was found.'})
     
-      Message.findByIdAndRemove(shop.messages)
-      Appointment.findByIdAndRemove(shop.appointments)
-      Comment.findByIdAndRemove(shop.comments)
-    res.status(200).json({message:`Shop ${shop.name} removed from DB.`})
+    function commentPromise () {
+      if(!shop.comments) return
+      return Promise.all(shop.comments.map(c => Comment.findByIdAndRemove(c))).catch(err => console.log(err))
+    }
+    function messagePromise () {
+      if(!shop.messages) return
+      return Promise.all(shop.messages.map(m => Message.findByIdAndRemove(m))).catch(err => console.log(err))
+    }
+    function appointPromise () {
+      if(!shop.appointments) return
+      return Promise.all(shop.appointments.map(a => Appointment.findByIdAndRemove(a))).catch()
+    } 
+    return Promise.all([
+      commentPromise(),
+      messagePromise(),
+      appointPromise(),
+      User.findByIdAndUpdate(req.user.id, {$pull:{shopsList:shop._id}}).exec()
+    ]).then(()=> res.status(200).json({message:`Shop ${shop.name} removed from DB.`}))
+    .catch(err => res.status(304).json({message:err}))
+
   
   })
-  .catch( err => res.status(500).json({message:`Delete did not succeed.`}))
+  .catch( err => res.status(500).json({message:`Delete did not succeed. ${err}`}))
 })
 module.exports = router;
