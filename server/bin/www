@@ -6,7 +6,7 @@ let app = require('../app');
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  // next(err);
 });
 
 app.use((err, req, res, next) => {
@@ -16,7 +16,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  // res.render('error');
 }); // Express middleware to handle errors
 
 let server = http.createServer(app);

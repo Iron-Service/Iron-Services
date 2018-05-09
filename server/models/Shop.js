@@ -3,11 +3,15 @@ const Schema   = mongoose.Schema;
 
 const shopSchema = new Schema({
   name: {type:String, required:true},
-  direcction: {type:Schema.Types.ObjectId, ref:"Direction", required:true},
+  direction: String,
   description: String,
   date: [{type:Date}],
   serviceType:{type:String, required:true},
-  serviceList: [{type:String, required:true}],
+  serviceList: [{
+    name:{type:String, required:true},
+    priceMin:{type:Number, required:true},
+    priceMax:{type:Number}
+  }],
   comments: [{type:Schema.Types.ObjectId, ref:"Comment"}],
   appointments:[{type:Schema.Types.ObjectId, ref:"Appointments"}],
   messages: {type:Schema.Types.ObjectId, ref:"Message"},
@@ -21,5 +25,5 @@ const shopSchema = new Schema({
   }
 });
 
-const Shop = mongoose.model('Shop', userSchema);
+const Shop = mongoose.model('Shop', shopSchema);
 module.exports = Shop;
