@@ -95,6 +95,6 @@ const shopRoutes = require("./routes/shop");
 app.use("/shop", shopRoutes)
 
 const messegeRoutes = require("./routes/message");
-app.use.("/message", meesegeRoutes);
+app.use("/message", meesegeRoutes);
 
 module.exports = app;
