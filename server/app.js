@@ -56,9 +56,7 @@ app.use(
   })
 );
 
-app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
-app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(favicon(path.join(__dirname, "public", "images", "favicon.ico")));
 
@@ -93,4 +91,6 @@ app.use("/", index);
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
 
+const shopRoutes = require("./routes/shop");
+app.use("/shop", shopRoutes)
 module.exports = app;
