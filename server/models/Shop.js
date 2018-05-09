@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const shopSchema = new Schema({
   name: {type:String, required:true},
-  direcction: {type:Schema.Types.ObjectId, ref:"Direction", required:true},
+  direction: {type:Schema.Types.ObjectId, ref:"Direction", required:true},
   description: String,
   date: [{type:Date}],
   serviceType:{type:String, required:true},

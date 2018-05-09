@@ -23,7 +23,7 @@ router.post('/signup', (req, res, next) => {
   
     User.findOne({$or:[{username},{email}]})
     .then( user => {
-        if(user.email === email) throw new Error ('The email already exists.. Pero chicooo,,,')
+        if(user.email === email) throw new Error ('The email already exists')
         if(user.username === username) throw new Error('The username already exists');
         
 
