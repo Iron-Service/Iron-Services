@@ -44,27 +44,64 @@ router.post("/shop/:id", (req, res) => {
   }).catch(err => res.status(400).json(err));
 });
 
-router.put("/shop/:id", (req, res) => {
-  const { positive } = req.body.positive;
-  const { negative } = req.body.negative * -1;
 
-  const commentEval = { positive, negative };
-  const p = _.pickBy(commentEval, _.identity);
-  //if(req.params.id.indexOf(req.params.id) === -1)
-  Shop.findById(req.params.id).then(shop => {
-    shop.positive += p;
-    shop
-      .update(
-        {
-          $and: [
-            { $push: { evaluees: req.user.id } },
-            { positive: shop.positive }
-          ]
-        },
-        { new: true }
-      )
-      .then(() => res.status(200).json(shop))
-      .catch(err => res.status(400).json(err));
+//:id --> id comment; :num ---> "1" = comment positive, "2" = comment negative;
+router.get("/:id/:num", (req, res) => {
+  const num = req.params.num;
+  const id = req.params.id;
+
+  function updateComment(comment, num) {
+    Comment.findByIdAndUpdate(comment._id, { $inc: { value: num } },{new:true})
+    .then(comment => res.status(200).json(comment))   
+  
+  }
+  function pushUserPositive(id, comment) {
+    comment.update({ $push: { evalueesPositive: id } }).then();
+  }
+
+  function pushUserNegative(id, comment) {
+    comment.update({ $push: { evalueesNegative: id } }).then();
+  }
+
+  function pullUserPositive(id, comment) {
+    comment.update({ $pull: { evalueesPositive: id } }).then();
+  }
+
+  function pullUserNegative(id, comment) {
+    comment.update({ $pull: { evalueesNegative: id } }).then();
+  }
+
+  Comment.findById(id).then(comment => {
+    
+    if(!comment) return res.status(500).json({message:"Error"})
+
+    if (comment.evalueesPositive.indexOf(req.user.id) != -1) {
+      if (num == "1") {
+        pullUserPositive(req.user.id, comment);
+        updateComment(comment, -1);
+      } else {
+        pullUserPositive(req.user.id, comment);
+        pushUserNegative(req.user.id, comment);
+        updateComment(comment, -2);
+      }
+    } else if (comment.evalueesNegative.indexOf(req.user.id) != -1) {
+      if (num == "2") {
+        pullUserNegative(req.user.id, comment);
+        updateComment(comment, +1);
+      } else {
+        pullUserNegative(req.user.id, comment);
+        pushUserPositive(req.user.id, comment);
+        updateComment(comment, +2);
+      }
+    } else {
+      if (num == "1") {
+        pushUserPositive(req.user.id, comment);
+        updateComment(comment, 1);
+      } else {
+        pushUserNegative(req.user.id, comment);
+        updateComment(comment, -1);
+      }
+    }
   });
 });
 

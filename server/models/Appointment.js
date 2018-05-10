@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const appointmentSchema = new Schema({
-    author:{type:Schema.Types.ObjectId, ref:'User'},
-    shop: {type:Schema.Types.ObjectId, ref: "Shop"},
+    _author:{type:Schema.Types.ObjectId, ref:'User'},
+    _shop: {type:Schema.Types.ObjectId, ref: "Shop"},
+    content: String,
     date: Date,
     approved: {type:Boolean, default:false}
 }, {

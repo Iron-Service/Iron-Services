@@ -13,13 +13,7 @@ const shopSchema = new Schema({
     priceMax:{type:Number}
   }],
   comments: [{type:Schema.Types.ObjectId, ref:"Comment"}],
-  appointments:[{type:Schema.Types.ObjectId, ref:"Appointments"}],
-<<<<<<< HEAD
-  messages: [{type:Schema.Types.ObjectId, ref:"Message"}],
-=======
-  messages: {type:Schema.Types.ObjectId, ref:"Message"},
-  evaluees: {type:Schema.Types.ObjectId, ref: "User"},
->>>>>>> ae6b25f6bc62558f7b4d04cb7e53491f0db736ec
+  evaluees: [{type:Schema.Types.ObjectId, ref: "User"}],
   positive: Number,
   negative: Number,
   numVisits: Number
