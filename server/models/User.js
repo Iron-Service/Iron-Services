@@ -13,8 +13,7 @@ const userSchema = new Schema({
   messages:[{type:Schema.Types.ObjectId, ref:"Message"}],
   
   shop: {type:Boolean, default:false},
-  shopsList: [{type:Schema.Types.ObjectId, ref:'Shop'}],
-
+  shopsList: [{type:Schema.Types.ObjectId, ref:'Shop'}],  
   admin: {type:Boolean, default:false}
   
 }, {
