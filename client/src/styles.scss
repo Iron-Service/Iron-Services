@@ -1,1 +1,58 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'scss_partials/_forms.scss';
+
+@font-face {
+    font-family: 'Abel';
+    src: url('./assets/fonts/abel-regular.ttf');
+}
+
+body {
+    font-family: 'Abel', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    border: none;
+    background: #10378d;
+    color: whitesmoke;
+    padding: 1rem 1rem;
+    transition: all 0.3s ease-in;
+    margin: 0;
+    &:hover {
+        color: #10378d;
+        background: whitesmoke;
+        border: 1px solid #10378d;
+    }
+}
+
+strong {
+    color: #10378d;
+}
+
+span.light {
+    color: lightslategray;
+}
+
+span.small {
+    color: rgb(70, 83, 95);
+    font-size: 0.7rem;
+}
+
+
+.backButton {
+    position: absolute;
+    top: 1rem;
+    right: 0;
+    padding: 1rem;
+    margin: 1rem 2rem;
+    &:hover {
+        background: rgb(79, 115, 151);
+    }
+}
+
