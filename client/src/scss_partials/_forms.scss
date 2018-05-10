@@ -1,0 +1,28 @@
+.form-container {
+  h2 {
+      text-align: center;
+  }
+  a {
+    background: lightslategray;
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease-in;
+    padding: 1rem 2rem;
+    margin: 0.25rem 0;
+}
+}
+
+form>button {
+  width: 100%;
+}
+
+form input {
+  float: right;
+  padding: 1rem 2rem;
+}
+
+form label {
+  display: inline-block;
+  padding: 1rem;
+}
