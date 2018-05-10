@@ -15,6 +15,7 @@ const shopSchema = new Schema({
   comments: [{type:Schema.Types.ObjectId, ref:"Comment"}],
   appointments:[{type:Schema.Types.ObjectId, ref:"Appointments"}],
   messages: {type:Schema.Types.ObjectId, ref:"Message"},
+  evaluees: {type:Schema.Types.ObjectId, ref: "User"},
   positive: Number,
   negative: Number,
   numVisits: Number

@@ -33,7 +33,8 @@ const users = [
     email: "pepe@pepe.pepe",
     password: hashPass,
     shop: false,
-    admin: false
+    admin: false,
+    evaluatedShops: []
   }
 ];
 
