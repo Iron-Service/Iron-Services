@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const complaintSchema = new Schema({
-    author:{type:Schema.Types.ObjectId, ref:'User'},
-    shop: {type:Schema.Types.ObjectId, ref: "Shop"},
+    _author:{type:Schema.Types.ObjectId, ref:'User'},
+    _shop: {type:Schema.Types.ObjectId, ref: "Shop"},
     complaintType: {type:String, required:true},
     content: String,
     resolved: {type:Boolean, default:false}

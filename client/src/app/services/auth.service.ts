@@ -1,6 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs/Rx";
-import { Http } from "@angular/http";
+import { Http, Response } from "@angular/http";
 
 @Injectable()
 export class AuthService {
@@ -12,6 +14,7 @@ export class AuthService {
 
   constructor(private http: Http) {
     this.isLoggedIn().subscribe();
+    console.log(this.user)
   }
 
   handleError(e) {
@@ -32,17 +35,17 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  logIn(user) {
+  logIn(username, password) {
     return this.http
-      .post(`${this.BASE_URL}/auth/login`, user, this.options)
+      .post(`${this.BASE_URL}/auth/login`, {username, password}, this.options)
       .map(res => res.json())
-      .map(user => this.handleUser(user))
+      .map(user =>  this.handleUser(user))
       .catch(this.handleError);
   }
 
   logOut() {
     return this.http
-      .post(`${this.BASE_URL}/auth/logout`, {}, this.options)
+      .get(`${this.BASE_URL}/auth/logout`, this.options)
       .map(res => res.json())
       .map(() => this.handleUser())
       .catch(this.handleError);
@@ -50,7 +53,7 @@ export class AuthService {
 
   isLoggedIn() {
     return this.http
-      .post(`${this.BASE_URL}/auth/loggedin`, {}, this.options)
+      .get(`${this.BASE_URL}/auth/loggedin`, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
       .catch(this.handleError);

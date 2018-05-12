@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'scss_partials/_forms.scss';
+@import './scss_partials/_forms.scss';
+@import './scss_partials/_button_overrides.scss';
 
 @font-face {
     font-family: 'Abel';

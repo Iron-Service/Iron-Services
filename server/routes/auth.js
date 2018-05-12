@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 
 const logInPromise = (user, req) => new Promise((resolve,reject) => {
     req.login(user, (err) => {
+        console.log(user)
         if (err) return reject('Something went wrong');
         resolve(user);
       });
