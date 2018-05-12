@@ -10,7 +10,8 @@ export class ShopService {
   constructor(private http: Http) {}
 
   getList() {
-    return this.http.get(`${this.BASE_URL}/shop`).map(res => res.json());
+    return this.http.get(`${this.BASE_URL}/shop`, this.options)
+    .map(res => res.json());
   }
 
   createShop(shop) {

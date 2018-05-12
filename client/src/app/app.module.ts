@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -18,6 +19,12 @@ import { UserDirectionsComponent } from './components/user-directions/user-direc
 import { UserMessagesComponent } from './components/user-messages/user-messages.component';
 import { UserShopsComponent } from './components/user-shops/user-shops.component';
 import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
+import { ShopService } from './services/shop.service';
+import { SearchService } from './services/search.service';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatCardModule} from '@angular/material/card';
+import { AppMaterialModule } from './app.module.material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,11 +43,13 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 ],
   imports: [
     BrowserModule,
+    AppMaterialModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],
+  providers: [AuthService, SearchService, ShopService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

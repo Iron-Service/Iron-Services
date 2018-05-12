@@ -1,3 +1,73 @@
-<p>
-  Here be our search
-</p>
+<!-- <div class="align-self-start">
+  <h2>Search</h2>
+  <div class="container">
+    <div class="">
+      <button (click)="getList()">Search</button>
+    </div>
+    <div>
+      <div *ngIf="shopList">
+        <div *ngFor="let shop of shopList">
+          <a [routerLink]="['/search/',shop.id]">{{shop.name}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<mat-card>
+  <mat-card-title>Search</mat-card-title>
+  <mat-form-field>
+    <mat-select [(value)]="selected">
+      <mat-option value="Hairdresser">Hairdresser</mat-option>
+      <mat-option value="Mechanic">Mechanic</mat-option>
+      <mat-option value="Tailor">Tailor</mat-option>
+      <mat-option value="Photographer">Photographer</mat-option>
+      <mat-option value="DrivingCourses">Driving Courses</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Services
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row justify-content-around" *ngIf="selected === 'Hairdresser'">
+        <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
+        <mat-checkbox class="col-2">Dry Cut</mat-checkbox>
+        <mat-checkbox class="col-2">Hair Up</mat-checkbox>
+        <mat-checkbox class="col-2">Hair Up and Trial</mat-checkbox>
+        <mat-checkbox class="col-2">Bridal Hair and Trial</mat-checkbox>
+        <mat-checkbox class="col-2">Cut and Finish</mat-checkbox>
+        <mat-checkbox class="col-2">Clipper Cut</mat-checkbox>
+        <mat-checkbox class="col-2">Full Head Highlights</mat-checkbox>
+        <mat-checkbox class="col-2">Full Head Tint</mat-checkbox>
+        <mat-checkbox class="col-2">Full Head Bleach</mat-checkbox>
+        <mat-checkbox class="col-2">Tonal Glossing</mat-checkbox>
+        <mat-checkbox class="col-2">Balayage</mat-checkbox>
+        <mat-checkbox class="col-2">Roots Tint</mat-checkbox>
+        <mat-checkbox>T-Section Highlights</mat-checkbox>
+        <mat-checkbox>Gents' Highlights</mat-checkbox>
+      </div>
+      <div class="row justify-content-around" *ngIf="selected === 'Mechanic'">
+          <mat-checkbox class="col-2">Wet Cut</mat-checkbox>
+          <mat-checkbox class="col-2">Dry Cut</mat-checkbox>
+          <mat-checkbox class="col-2">Hair Up</mat-checkbox>
+          <mat-checkbox class="col-2">Hair Up and Trial</mat-checkbox>
+          <mat-checkbox class="col-2">Bridal Hair and Trial</mat-checkbox>
+          <mat-checkbox class="col-2">Cut and Finish</mat-checkbox>
+          <mat-checkbox class="col-2">Clipper Cut</mat-checkbox>
+          <mat-checkbox class="col-2">Full Head Highlights</mat-checkbox>
+          <mat-checkbox class="col-2">Full Head Tint</mat-checkbox>
+          <mat-checkbox class="col-2">Full Head Bleach</mat-checkbox>
+          <mat-checkbox class="col-2">Tonal Glossing</mat-checkbox>
+          <mat-checkbox class="col-2">Balayage</mat-checkbox>
+          <mat-checkbox class="col-2">Roots Tint</mat-checkbox>
+          <mat-checkbox>T-Section Highlights</mat-checkbox>
+          <mat-checkbox>Gents' Highlights</mat-checkbox>
+        </div>
+
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-card>
