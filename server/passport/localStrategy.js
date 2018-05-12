@@ -1,7 +1,7 @@
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User          = require('../models/User');
 const bcrypt        = require('bcrypt');
+const User          = require('../models/User');
+const LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy((username, password, next) => {
   User.findOne({ username }, (err, foundUser) => {
@@ -20,6 +20,6 @@ passport.use(new LocalStrategy((username, password, next) => {
       return;
     }
 
-    next(null, foundUser);
+    return next(null, foundUser);
   });
 }));

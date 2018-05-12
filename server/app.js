@@ -45,9 +45,19 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-
+app.use(
+  session({
+    secret: "cats",
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60
+    })
+  })
+);
 // Express View engine setup
-
+require("./passport")(app);
 app.use(
   require("node-sass-middleware")({
     src: path.join(__dirname, "public"),
@@ -74,16 +84,8 @@ hbs.registerHelper("ifUndefined", (value, options) => {
 app.locals.title = "Iron-Service";
 
 // Enable authentication using session + passport
-app.use(
-  session({
-    secret: "Iron-Services",
-    resave: true,
-    saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
-  })
-);
 app.use(flash());
-require("./passport")(app);
+
 
 const index = require("./routes/index");
 app.use("/", index);

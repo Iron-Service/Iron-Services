@@ -1,0 +1,7 @@
+<div *ngIf="authService.user">
+<div class="btn-group-vertical">
+  <a routerLink="directions" class="btn btn-primary">Directions</a>
+  <a routerLink="favorites" class="btn btn-primary">Favorites</a>
+  <a routerLink="messages" class="btn btn-primary">Messages</a>
+  <a routerLink="shops" *ngIf="authService.user.shop===true" class="btn btn-primary">Shops</a>
+</div>
