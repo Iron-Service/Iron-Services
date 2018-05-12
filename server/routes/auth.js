@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 
 const logInPromise = (user, req) => new Promise((resolve,reject) => {
     req.login(user, (err) => {
-        console.log(user)
         if (err) return reject('Something went wrong');
         resolve(user);
       });
@@ -44,6 +43,8 @@ router.post('/signup', (req, res, next) => {
     .then(user => res.status(200).json(user))
     .catch(e => res.status(500).json({message:e.message}));
 });
+
+
 
 router.post('/login', (req, res, next) => {
     const {username, password} = req.body;

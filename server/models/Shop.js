@@ -6,7 +6,10 @@ const shopSchema = new Schema({
   direction: String,
   description: String,
   date: [{type:Date}],
-  serviceType:{type:String, required:true},
+  serviceType:{
+    type:String, 
+    enum:['Hairdresser', "Mechanic", "Tailor", "Photographer", "Driving Courses"],
+    required:true},
   serviceList: [{
     name:{type:String, required:true},
     priceMin:{type:Number, required:true},

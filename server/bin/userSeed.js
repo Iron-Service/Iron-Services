@@ -26,6 +26,10 @@ const shop = {
     {
       name: "blabla",
       priceMin: 1
+    },
+    {
+      name: "Pepe",
+      priceMin: 1
     }
   ]
 };

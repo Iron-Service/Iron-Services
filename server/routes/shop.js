@@ -16,7 +16,7 @@ router.post('/create', (req, res) => {
   Shop.findOne({direction: shop.direction}).then( shops => {
     
     if(shops && shops.direction === shop.direction ) return res.status(400).json({message:`There's already a shop at ${shop.direction} place.`})
-   
+    console.log(shop)
     Shop.create(shop,(err, arrayShop) => {
       if(err)  return res.status(400).json({message:`Shop ${shop.name} error.`})
       console.log(`Shop ${shop.name} created.`)
