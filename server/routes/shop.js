@@ -6,6 +6,8 @@ const Comment = require("../models/Comment");
 const Appointment = require("../models/Appointment");
 const Message = require("../models/Message");
 const User = require("../models/User")
+const isUserShop = require("../middlewares/isUserShop")
+const ensureLogedIn = require("../middlewares/ensureLogedIn");
 
 router.post('/create', (req, res) => {
   const {name, direction, description, serviceType, serviceList } = req.body;
@@ -25,17 +27,18 @@ router.post('/create', (req, res) => {
 })
 
 //Show all shops of the owner
-router.get('/', (req, res) => { 
+router.get('/', ensureLogedIn("/shop"), (req, res) => { 
+  console.log("pepe")
   Shop.find({_id:req.user.shopsList})
   .then(list => {
     let listId = [];
     list.forEach(e => listId.push({id:e._id, name:e.name, direction:e.direction}))
     res.status(200).json(listId)})
-  .catch(err => res.status(400).json(err))  
+  .catch(err => res.status(400).json(err))
 })
 
 //Enter into the shop
-router.get('/:id', (req,res) => {
+router.get('/:id',(req,res) => {
   Shop.findById(req.params.id)
   .then( shop => res.status(200).json(shop))
   .catch( err => res.status(400).json(err))

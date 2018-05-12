@@ -1,25 +1,27 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const User          = require('../models/User');
-const bcrypt        = require('bcrypt');
+const passport = require("passport");
+const bcrypt = require('bcrypt');
+const User = require("../models/User");
+const LocalStrategy = require("passport-local").Strategy;
 
-passport.use(new LocalStrategy((username, password, next) => {
-  User.findOne({ username }, (err, foundUser) => {
-    if (err) {
-      next(err);
-      return;
-    }
+const path = require("path");
+const app_name = require("../package.json").name;
+const debug = require("debug")(`${app_name}:${path.basename(__filename).split(".")[0]}`);
 
-    if (!foundUser) {
-      next(null, false, { message: 'Incorrect username' });
-      return;
-    }
 
-    if (!bcrypt.compareSync(password, foundUser.password)) {
-      next(null, false, { message: 'Incorrect password' });
-      return;
-    }
-
-    next(null, foundUser);
-  });
-}));
+passport.use(
+  new LocalStrategy((username, password, next) => {
+    User.findOne({ username }, (err, user) => {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        return next(null, false, { message: "Incorrect username" });
+      }
+      if (!bcrypt.compareSync(password, user.password)) {
+        return next(null, false, { message: "Incorrect password" });
+      }
+      debug('User logged in!');
+      return next(null, user);
+    });
+  })
+);
