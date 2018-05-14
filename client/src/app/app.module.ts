@@ -2,27 +2,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
-import { AppComponent } from './app.component';
+//  Services Imports
 import { AuthService } from './services/auth.service';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { routes } from './routers/my-route.routing';
-import { SearchComponent } from './components/search/search.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { ShopProfileComponent } from './components/shop-profile/shop-profile.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { UrlPipe } from './pipes/url.pipe'
-import { UserDirectionsComponent } from './components/user-directions/user-directions.component';
-import { UserMessagesComponent } from './components/user-messages/user-messages.component';
-import { UserShopsComponent } from './components/user-shops/user-shops.component';
-import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
 import { ShopService } from './services/shop.service';
 import { SearchService } from './services/search.service';
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { MatCardModule} from '@angular/material/card';
+//  Router imports
+import { routes } from './routers/my-route.routing';
+//  Pipe imports
+import { UrlPipe } from './pipes/url.pipe'
+//  Component imports
+import { AppComponent } from './app.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ShopProfileComponent } from './components/shop-profile/shop-profile.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { UserDirectionsComponent } from './components/user-directions/user-directions.component';
+import { UserMessagesComponent } from './components/user-messages/user-messages.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UserShopsComponent } from './components/user-shops/user-shops.component';
+import { UserFavoritesComponent } from './components/user-favorites/user-favorites.component';
+//  Material imports
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,6 +35,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignUpComponent,
     LogInComponent,
     SearchComponent,
+    SearchResultsComponent,
     NavbarComponent,
     ShopProfileComponent,
     UserProfileComponent,
@@ -46,6 +50,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppMaterialModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(routes)
   ],

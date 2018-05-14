@@ -13,6 +13,17 @@ export class SearchService {
     return this.http.get(`${this.BASE_URL}/`, this.options)
     .map(res => res.json());
   }
+  getListEvent(shop){
+    return this.http.get(`${this.BASE_URL}/${shop}`, this.options)
+    .map(res => res.json());
+  }
+
+  getListEvents(shop, name){
+    return this.http.get(`${this.BASE_URL}/${shop}?name=${name}`, this.options)
+    // &min=${priceMin}&max=${priceMax}
+    .map(res => res.json());
+  }
+
   getShop(id) {
     return this.http
       .get(`${this.BASE_URL}/search/${id}`)

@@ -7,18 +7,21 @@ const ensureLogedIn = require("../middlewares/ensureLogedIn");
 
 const s = {};
 
-router.get("/", (req, res, next) => {
+
+
+router.get('/', (req, res, next) => {
+
+  
+
   Shop.find()
-    .then(shop => {
+  .select({name:1, direction:1, serviceType:1, serviceList:1})
+  .then(
+    shop => {
       console.log(shop);
-      let serviceTypearray = [];
-      shop.forEach(e => {
-        if (serviceTypearray.indexOf(e.serviceType) === -1)
-          serviceTypearray.push(e.serviceType);
-      });
-      res.status(200).json(serviceTypearray);
-    })
-    .catch(err => res.status(500).json({ message: err }));
+      res.status(200).json(shop);}
+  )
+  .catch(err => res.status(500).json({message:err}));
+
 });
 
 router.get("/:service", (req, res) => {

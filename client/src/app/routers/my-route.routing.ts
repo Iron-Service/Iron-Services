@@ -10,10 +10,11 @@ import { UserShopsComponent } from '../components/user-shops/user-shops.componen
 import { UserFavoritesComponent } from '../components/user-favorites/user-favorites.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo:'home', pathMatch:'full'},
-  { path: 'home', component: SearchComponent},
+  { path: '', redirectTo:'search', pathMatch:'full'},
+  { path: 'search', component: SearchComponent},
   { path: 'signup', component: SignUpComponent},
   { path: 'login', component: LogInComponent},
+  { path: 'logout', component: LogInComponent},
   { path: 'search/:id', component: SearchComponent},
   { path: 'shop/:id', component: ShopProfileComponent},
   { path: 'profile', component: UserProfileComponent},

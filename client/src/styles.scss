@@ -8,10 +8,12 @@
     src: url('./assets/fonts/abel-regular.ttf');
 }
 
+
 body {
     font-family: 'Abel', sans-serif;
     font-size: 16px;
     box-sizing: border-box;
+    background: lightgray;
 }
 
 .main {
@@ -21,20 +23,20 @@ body {
 
 button {
     border: none;
-    background: #10378d;
+    background: indigo;
     color: whitesmoke;
     padding: 1rem 1rem;
     transition: all 0.3s ease-in;
     margin: 0;
     &:hover {
-        color: #10378d;
+        color: indigo;
         background: whitesmoke;
-        border: 1px solid #10378d;
+        border: 1px solid indigo;
     }
 }
 
 strong {
-    color: #10378d;
+    color: indigo;
 }
 
 span.light {

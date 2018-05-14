@@ -18,7 +18,7 @@ export class LogInComponent {
     console.log(this.username, this.password);
     this.authService
       .logIn(this.username, this.password)
-      .subscribe(() => this.router.navigate(["/home"]));
+      .subscribe(() => this.router.navigate(["/search"]));
   }
 
   logOut() {
