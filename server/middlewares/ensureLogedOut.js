@@ -1,4 +1,4 @@
 
-const ensureLoggedOut = redirectTo => (req, res, next) => !req.user ? next():res.redirect(redirectTo)
+const ensureLoggedOut = message => (req, res, next) => !req.user ? next():res.status(500).json({message});
 
 module.exports = ensureLoggedOut;

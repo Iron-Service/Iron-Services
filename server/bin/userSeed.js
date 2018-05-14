@@ -21,7 +21,7 @@ const shop = {
   name: "Chambawamba",
   description:"oandosadpasmd",
   direction:"landpmsad",
-  serviceType: "Bailar",
+  serviceType: "Hairdresser",
   serviceList: [
     {
       name: "blabla",

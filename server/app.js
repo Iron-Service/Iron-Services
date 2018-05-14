@@ -87,8 +87,6 @@ app.locals.title = "Iron-Service";
 app.use(flash());
 
 
-const index = require("./routes/index");
-app.use("/", index);
 
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
@@ -114,6 +112,9 @@ app.use("/direction", directionRoutes);
 const adminRoutes = require("./routes/admin");
 app.use("/admin", adminRoutes);
 
+const index = require("./routes/index");
+app.use("/", index);
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error("Not Found");
@@ -129,7 +130,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.json({message:"error"});
 });
 
 module.exports = app;

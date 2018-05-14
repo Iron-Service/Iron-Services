@@ -44,36 +44,46 @@ router.post("/shop/:id", (req, res) => {
   }).catch(err => res.status(400).json(err));
 });
 
-
 //:id --> id comment; :num ---> "1" = comment positive, "2" = comment negative;
 router.get("/:id/:num", (req, res) => {
   const num = req.params.num;
   const id = req.params.id;
 
   function updateComment(comment, num) {
-    Comment.findByIdAndUpdate(comment._id, { $inc: { value: num } },{new:true})
-    .then(comment => res.status(200).json(comment))   
-  
+    Comment.findByIdAndUpdate(
+      comment._id,
+      { $inc: { value: num } },
+      { new: true }
+    )
+      .then(comment => res.status(200).json(comment))
+      .catch(err => res.status(400).json({ message: err }));
   }
   function pushUserPositive(id, comment) {
-    comment.update({ $push: { evalueesPositive: id } }).then();
+    comment
+      .update({ $push: { evalueesPositive: id } })
+      .catch(err => res.status(400).json({ message: err }));
   }
 
   function pushUserNegative(id, comment) {
-    comment.update({ $push: { evalueesNegative: id } }).then();
+    comment
+      .update({ $push: { evalueesNegative: id } })
+      .catch(err => res.status(400).json({ message: err }));
   }
 
   function pullUserPositive(id, comment) {
-    comment.update({ $pull: { evalueesPositive: id } }).then();
+    comment
+      .update({ $pull: { evalueesPositive: id } })
+      .catch(err => res.status(400).json({ message: err }));
   }
 
   function pullUserNegative(id, comment) {
-    comment.update({ $pull: { evalueesNegative: id } }).then();
+    comment
+      .update({ $pull: { evalueesNegative: id } })
+      .catch(err => res.status(400).json({ message: err }));
   }
 
   Comment.findById(id).then(comment => {
-    
-    if(!comment) return res.status(500).json({message:"Error"})
+    if (!comment) return res.status(500).json({ message: "Error" });
 
     if (comment.evalueesPositive.indexOf(req.user.id) != -1) {
       if (num == "1") {

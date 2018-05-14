@@ -1,7 +1,7 @@
 
 
 
-const ensureLoggedIn = (redirectTo) => (req,res,next) => req.user ? next(): res.redirect(redirectTo)
+const ensureLoggedIn = message => (req,res,next) => req.user ? next(): res.status(500).json({message});
 
 
 

@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
   .then(message => {
     return res.status(200).json(message);
   })
-  .catch(err => res.status(500).json({message:err}))
+  .catch(err => res.status(500).json({message:err}));
 });
 
 router.post("/create/:id", (req, res) => {
@@ -23,7 +23,7 @@ router.post("/create/:id", (req, res) => {
     _shop:req.params.id,
     title,
     content
-  })
+  });
 
   return newMessage.save()
   .then(m => {
@@ -31,9 +31,9 @@ router.post("/create/:id", (req, res) => {
     return Promise.all([
       User.findByIdAndUpdate(req.user.id, {$push:{messages:m._id}}),
       Shop.findByIdAndUpdate(req.params.id, {$push:{messages:m._id}})]
-    ).then(() => res.status(200).json(m))
+    ).then(() => res.status(200).json(m));
     })
-    .catch(err => res.status(500).json({message:err}))
+    .catch(err => res.status(500).json({message:err}));
    
   
 });
@@ -45,7 +45,7 @@ router.post("/create/:id/shop/:idu", (req, res) => {
     _shop:req.params.id,
     title,
     content
-  })
+  });
 
   return newMessage.save()
   .then(m => {
@@ -53,18 +53,18 @@ router.post("/create/:id/shop/:idu", (req, res) => {
     return Promise.all([
       User.findByIdAndUpdate(req.params.idu, {$push:{messages:m._id}}),
       Shop.findByIdAndUpdate(req.params.id, {$push:{messages:m._id}})]
-    ).then(() => res.status(200).json(m))
+    ).then(() => res.status(200).json(m));
     })
-    .catch(err => res.status(500).json({message:err}))
+    .catch(err => res.status(500).json({message:err}));
 
-})
+});
 
 router.get('/:id', (req, res, next) => {
   Message.find({$and:[{_user:req.user.id},{_shop:req.params.id}]})
   .then(message => {
     return res.status(200).json(message);
   })
-  .catch(err => res.status(500).json({message:err}))
+  .catch(err => res.status(500).json({message:err}));
 });
 
 router.get('/:id/shop', (req, res, next) => {
@@ -72,7 +72,7 @@ router.get('/:id/shop', (req, res, next) => {
   .then(message => {
     return res.status(200).json(message);
   })
-  .catch(err => res.status(500).json({message:err}))
+  .catch(err => res.status(500).json({message:err}));
 });
 
 router.get('/:id/shop/:idu', (req, res, next) => {
@@ -80,7 +80,7 @@ router.get('/:id/shop/:idu', (req, res, next) => {
   .then(message => {
     return res.status(200).json(message);
   })
-  .catch(err => res.status(500).json({message:err}))
+  .catch(err => res.status(500).json({message:err}));
 });
 
 
