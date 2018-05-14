@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Shop = require("../models/Shop");
+const ShopList = require("../models/ShopList");
+const City = require("../models/City");
 const _ = require("lodash");
 const ensureLogedIn = require("../middlewares/ensureLogedIn");
 /* GET home page */
@@ -38,8 +40,7 @@ router.get("/:service", (req, res) => {
   if (max.priceMax.$lte == undefined) max = _.pickBy(max.priceMax, _.identity);
 
   
-  console.log(req.query.name);
-  if (req.query.name != undefined || req.query.name != " ")
+  if (req.query.name != undefined)
     joker = {
       "serviceList.name": {
         $all: req.query.name.split(",")
@@ -80,10 +81,23 @@ router.get("/search/:id", (req, res) => {
     .then(shop => res.status(200).json(shop))
     .catch(err => res.status(500).json({ message: err }));
 });
-
+//Update comments
 router.get("/search/:id/:num", (req, res) => {
   const idShop = req.params.id;
   Shop.findByIdAndUpdate(idShop);
 });
 
+//ShopList
+router.get("/shopList", (req, res) => {
+  ShopList.find()
+  .then(shopList => res.status(200).json(shopList))
+  .catch(err => res.status(500).json({message:err}));
+});
+
+//City
+router.get("/city", (req, res) => {
+  City.find()
+  .then(city => res.status(200).json(city))
+  .catch(err => res.status(500).json({message:err}));
+});
 module.exports = router;
