@@ -14,7 +14,7 @@
       <mat-option *ngFor="let list of shopList" value={{list.serviceType}}>{{list.serviceType}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button (click)="getList()" type="submit" class="col-md-3">Search</button>
+  <button (click)="getListEvent()" type="submit" class="col-md-3">Search</button>
   <mat-accordion *ngIf="type">
     <mat-expansion-panel [style.backgroundColor]="'#e6e6ff'">
         <mat-expansion-panel-header>
@@ -23,26 +23,25 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="row justify-content-start" *ngIf="type === shopList[0].serviceType">
-          <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
-          <mat-checkbox *ngFor="let list of shopList[0].serviceList" class="col-md-3" value={{list.name}}>{{list.name}}</mat-checkbox>
+          <mat-checkbox *ngFor="let list of shopList[0].serviceList" class="col-md-3" [(ngModel)]="services" [checked]="services" (change)="services = !services" value={{list.name}}>{{list.name}}</mat-checkbox>
         </div>
         <div class="row justify-content-start" *ngIf="type === shopList[1].serviceType">
-          <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
-          <mat-checkbox *ngFor="let list of shopList[1].serviceList" class="col-md-3" value={{list.name}}>{{list.name}}</mat-checkbox>
+          <mat-checkbox *ngFor="let list of shopList[1].serviceList; let i = index" class="col-md-3" [(ngModel)]="list.name" [checked]="list.name" (change)="services = !services" value={{list.name}}>{{list.name}}</mat-checkbox>
         </div>
         <div class="row justify-content-start" *ngIf="type === shopList[2].serviceType">
-          <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
-          <mat-checkbox *ngFor="let list of shopList[2].serviceList" class="col-md-3" value={{list.name}}>{{list.name}}</mat-checkbox>
+          <mat-checkbox *ngFor="let list of shopList[2].serviceList" class="col-md-3" [(ngModel)]="services" [checked]="services" (change)="services = !services" value={{list.name}}>{{list.name}}</mat-checkbox>
         </div>
         <div class="row justify-content-start" *ngIf="type === shopList[3].serviceType">
-          <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
-          <mat-checkbox *ngFor="let list of shopList[3].serviceList" class="col-md-3" value={{list.name}}>{{list.name}}</mat-checkbox>
+          <mat-checkbox *ngFor="let list of shopList[3].serviceList" class="col-md-3" [(ngModel)]="services" [checked]="services" (change)="services = !services" value={{list.name}}>{{list.name}}</mat-checkbox>
         </div>
         <div class="row justify-content-start" *ngIf="type === shopList[4].serviceType">
-          <!-- <mat-checkbox class="col-2">Wet Cut</mat-checkbox> -->
-          <mat-checkbox *ngFor="let list of shopList[4].serviceList" class="col-md-3" value={{list.name}}>{{list.name}}</mat-checkbox>
+          <mat-checkbox *ngFor="let list of shopList[4].serviceList" class="col-md-3" [(ngModel)]="services" [checked]="services" (change)="services = !services" value={{list.name}}>{{list.name}}</mat-checkbox>
         </div>
     </mat-expansion-panel>
   </mat-accordion>
 </mat-card>
-<app-search-results></app-search-results>
+<mat-card class="col-md-8 offset-md-2">
+  <mat-card *ngFor="let shop of shopsData">
+    <app-search-results [shopItem]="shop"></app-search-results>
+  </mat-card>
+</mat-card>

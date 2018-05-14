@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
 import { AuthService } from "../../services/auth.service";
@@ -20,7 +20,7 @@ export interface Shop {
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent implements OnInit {
-  shopsData: Array<Object> = []
+  @Input() shopItem: any;
 
   constructor(
     private shopService: ShopService,
@@ -28,18 +28,12 @@ export class SearchResultsComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
   ) {
-    this.searchService.getList().subscribe( list => { 
-      this.shopsData = list
-      });
+
   }
 
   ngOnInit() {
   }
 
-  setShopsList(shop){
-    this.searchService.getListEvent(shop).subscribe( list => {
-      this.shopsData = list
-    });
-  }
+
 
 }

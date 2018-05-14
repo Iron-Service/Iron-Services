@@ -3,21 +3,21 @@ import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { SearchService } from "../../services/search.service";
 import { FormControl } from "@angular/forms";
-
+import { ShopService } from "../../services/shop.service";
 
 @Component({
   selector: "app-search",
   templateUrl: "./search.component.html",
   styleUrls: ["./search.component.scss"]
 })
-
-
-
 export class SearchComponent implements OnInit {
- 
-  
+  shopsData: Array<Object> = [];
+  services:string;
+  type: string;
+
   cities: Array<Object> = [
-    { name: "Madrid", 
+    {
+      name: "Madrid",
       districts: [
         { name: "Centro" },
         { name: "Arganzuela" },
@@ -111,13 +111,19 @@ export class SearchComponent implements OnInit {
       ]
     }
   ];
-
- 
-
-
-  ngOnInit() {
-   
+  
+  constructor(
+    private shopService: ShopService,
+    private searchService: SearchService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+  getListEvent() {
+    this.searchService.getListEvent(this.type).subscribe(list => {
+      this.shopsData = list;
+    });
+    console.log(this.services)
   }
+  ngOnInit() {}
   
 }
-
