@@ -13,15 +13,12 @@ router.get('/', (req, res, next) => {
 
   
 
-  Shop.find().then(
+  Shop.find()
+  .select({name:1, direction:1, serviceType:1, serviceList:1})
+  .then(
     shop => {
       console.log(shop)
-      let serviceTypearray = [];
-      shop.forEach(e => {
-        if(serviceTypearray.indexOf(e.serviceType) === -1)
-          serviceTypearray.push(e.serviceType)
-      })
-      res.status(200).json(serviceTypearray)}
+      res.status(200).json(shop)}
   )
   .catch(err => res.status(500).json({message:err}))
 
@@ -47,7 +44,7 @@ router.get('/:service', (req, res) => {
   .then(shop => {
       let search = []
       shop.forEach(e => {
-        search.push({_id:e._id ,name:e.name, direction:e.direction, description:e.description})
+        search.push({_id:e._id ,name:e.name, serviceType: e.serviceType, direction:e.direction, description:e.description})
       })
       res.status(200).json(search)}
   )
