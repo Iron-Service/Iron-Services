@@ -39,7 +39,7 @@ router.get("/:service", (req, res) => {
 
   
   console.log(req.query.name);
-  if (req.query.name != undefined || req.query.name != " ")
+  if (req.query.name != undefined)
     joker = {
       "serviceList.name": {
         $all: req.query.name.split(",")

@@ -13,8 +13,8 @@ export class SearchService {
     return this.http.get(`${this.BASE_URL}/`, this.options)
     .map(res => res.json());
   }
-  getListEvent(shop){
-    return this.http.get(`${this.BASE_URL}/${shop}`, this.options)
+  getListEvent(myForm){
+    return this.http.get(`${this.BASE_URL}/${myForm}`, this.options)
     .map(res => res.json());
   }
 

@@ -11,7 +11,7 @@ import { ShopService } from "../../services/shop.service";
   styleUrls: ["./search.component.scss"]
 })
 export class SearchComponent implements OnInit {
-  shopsData: Array<Object> = [];
+  shopsData: any;
   services:string;
   type: string;
 
@@ -118,12 +118,13 @@ export class SearchComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {}
-  getListEvent() {
-    this.searchService.getListEvent(this.type).subscribe(list => {
-      this.shopsData = list;
-    });
-    console.log(this.services)
-  }
+
   ngOnInit() {}
-  
+  getListEvent(queryForm) {
+    console.log(queryForm)
+    this.searchService.getListEvent(queryForm).subscribe( () => {
+      console.log(typeof queryForm.form.value)
+      this.shopsData = [queryForm.form.value];
+    });
+  }
 }
