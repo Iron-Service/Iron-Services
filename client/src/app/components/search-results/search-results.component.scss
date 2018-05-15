@@ -1,0 +1,13 @@
+mat-chip {
+    background-color: indigo !important;
+    color: white !important;
+}
+
+.shop {
+    background: #e6e6ff;
+    &:hover {
+        transform: scale(1.05, 1.05);
+        bakcground: #e6e6ff;
+        transition: all 0.3s ease-in;
+    }
+}

@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private http: Http) {
     this.isLoggedIn().subscribe();
-    console.log(this.user)
   }
 
   handleError(e) {

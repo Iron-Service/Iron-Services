@@ -1,5 +1,5 @@
-<form (ngSubmit)="getListEvent(queryForm)" #queryForm="ngForm">
 <mat-card class="col-md-8 offset-md-2">
+  <form (ngSubmit)="getListEvent(queryForm)" #queryForm="ngForm">
   <mat-form-field class="col-md-3">
     <mat-select placeholder="City" [(ngModel)]=city name="city" >
       <mat-option *ngFor="let list of cities" value={{list.name}}>{{list.name}}</mat-option>
@@ -24,18 +24,15 @@
       </mat-expansion-panel-header>
       <div class="justify-content-start" *ngFor="let group of shopList; let j = index">
         <div class="row" *ngIf="type === shopList[j].serviceType">
-          <mat-checkbox class="col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" ngModel="object.selected" name={{list.name}} [(ngModel)]="list.name.selected">
+          <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" name={{list.name}} [(ngModel)]="list.name.selected">
             {{list.name}}</mat-checkbox>
           </div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
     <button type="submit" class="align-self-end col-md-3">Search</button>
+  </form>
 </mat-card>
-</form>
-<mat-card class="col-md-8 offset-md-2">
-  {{shopsData | json}}
-  <mat-card *ngFor="let shop of shopsData">
+  <mat-card *ngFor="let shop of shopsData" class="col-md-8 offset-md-2">
     <app-search-results [shopItem]="shop"></app-search-results>
-  </mat-card>
 </mat-card>

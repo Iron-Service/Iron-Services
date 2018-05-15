@@ -3,16 +3,19 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {
+  MatAutocompleteModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDividerModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatGridListModule,
+  MatIconModule,
+  MatListModule,
   MatSelectModule,
   MatSlideToggleModule,
-  MatCardModule,
-  MatAutocompleteModule,
-  MatExpansionModule,
-  MatCheckboxModule,
   MatSliderModule,
-  MatDividerModule,
 
 } from "@angular/material";
 
@@ -22,10 +25,13 @@ import {
     MatAutocompleteModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatIconModule,
+    MatListModule,
     MatSliderModule,
     MatSlideToggleModule,
     MatSelectModule
@@ -35,10 +41,13 @@ import {
     MatAutocompleteModule,
     MatCardModule,
     MatCheckboxModule,
+    MatChipsModule,
     MatDividerModule,
     MatExpansionModule,
     MatFormFieldModule,
     MatGridListModule,
+    MatIconModule,
+    MatListModule,
     MatSelectModule,
     MatSliderModule,
     MatSlideToggleModule

@@ -1,4 +1,11 @@
-<h2>{{shopItem.city}}</h2>
-<p>{{shopItem.type}}</p>
-<p>{{shopItem.direction}}</p>
-{{shopItem | json}}
+<mat-card class="shop" [routerLink]="['/shop', shopItem._id]">
+  <div class="col-6">
+    <mat-card-title>{{shopItem.name}}</mat-card-title>
+    <mat-card-subtitle>{{shopItem.direction}}</mat-card-subtitle>
+    <mat-chip-list>
+      <mat-chip *ngFor="let service of shopItem.serviceList">{{service.name}}</mat-chip>
+    </mat-chip-list>
+  </div>
+  <mat-card-content class="col-6">{{shopItem.description}}</mat-card-content>
+</mat-card>
+<!-- {{shopItem | json}} -->

@@ -4,10 +4,7 @@
             <a class="navbar-brand">Logo</a>
             <ul class="nav navbar-nav" routerLinkActive="active">
                 <li class="nav-item" *ngIf="router.url!=='/search'&&router.url!==''">
-                    <a class="nav-link" routerLink="search">Home</a>
-                </li>
-                <li *ngIf="!authService.user&&router.url!=='/login'" class="nav-item">
-                    <a class="nav-link" routerLink="login">Log in</a>
+                    <a class="nav-link" routerLink="search">Search</a>
                 </li>
                 <li *ngIf="authService.user&&router.url!=='/profile'" class="nav-item">
                     <a class="nav-link" routerLink="profile">Profile</a>
@@ -24,7 +21,8 @@
         </div>
         <ul class="nav navbar-nav align-self-end" routerLinkActive="active">
             <li class="nav-item logout">
-                <a routerLink="logout" class="nav-link">Log out</a>
+                <a *ngIf="authService.user"  routerLink="search" (click)="logOut()" class="nav-link">Log out</a>
+                <a *ngIf="!authService.user" routerLink="login" class="nav-link">Log in</a>
             </li>
         </ul>
     </nav>

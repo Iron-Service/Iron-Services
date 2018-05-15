@@ -18,15 +18,19 @@ export class SearchService {
     .map(res => res.json());
   }
 
-  getListEvents(shop, name){
-    return this.http.get(`${this.BASE_URL}/${shop}?name=${name}`, this.options)
-    // &min=${priceMin}&max=${priceMax}
-    .map(res => res.json());
-  }
-
   getShop(id) {
     return this.http
-      .get(`${this.BASE_URL}/search/${id}`)
+      .get(`${this.BASE_URL}/search/${id}`, this.options)
       .map(res => res.json());
+  }
+  getCity() {
+    return this.http
+    .get(`${this.BASE_URL}/city/`)
+    .map(res => res.json());
+  }
+  getShopTypes() {
+    return this.http
+    .get(`${this.BASE_URL}/shopList/`)
+    .map(res => res.json());
   }
 }

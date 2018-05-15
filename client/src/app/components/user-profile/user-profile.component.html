@@ -1,7 +1,10 @@
-<div *ngIf="authService.user">
-<div class="btn-group-vertical">
-  <a routerLink="directions" class="btn btn-primary">Directions</a>
-  <a routerLink="favorites" class="btn btn-primary">Favorites</a>
-  <a routerLink="messages" class="btn btn-primary">Messages</a>
-  <a routerLink="shops" *ngIf="authService.user.shop===true" class="btn btn-primary">Shops</a>
-</div>
+<mat-card class="d-flex col-md-8 offset-md-2 justify-content-center">
+  <div *ngIf="authService.user">
+    <div class="btn-group-vertical">
+      <mat-card routerLink="directions" class="btn btn-primary">Directions</mat-card>
+      <mat-card routerLink="favorites" class="btn btn-primary">Favorites</mat-card>
+      <mat-card routerLink="messages" class="btn btn-primary">Messages</mat-card>
+      <mat-card routerLink="shops" *ngIf="authService.user.shop===true" class="btn btn-primary">Shops</mat-card>
+    </div>
+  </div>
+</mat-card>
