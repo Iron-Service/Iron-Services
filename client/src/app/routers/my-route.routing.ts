@@ -8,6 +8,7 @@ import { UserDirectionsComponent } from '../components/user-directions/user-dire
 import { UserMessagesComponent } from '../components/user-messages/user-messages.component';
 import { UserShopsComponent } from '../components/user-shops/user-shops.component';
 import { UserFavoritesComponent } from '../components/user-favorites/user-favorites.component';
+import { ShopCreateComponent } from '../components/shop-create/shop-create.component';
 
 export const routes: Routes = [
   { path: '', redirectTo:'search', pathMatch:'full'},
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'profile/directions', component: UserDirectionsComponent },
   { path: 'profile/messages', component: UserMessagesComponent},
   { path: 'profile/shops', component: UserShopsComponent },
+  { path: 'profile/shops/create', component: ShopCreateComponent},
   { path: 'profile/favorites', component: UserFavoritesComponent },
 ];
 

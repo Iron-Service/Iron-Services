@@ -19,6 +19,7 @@ import { LogInComponent } from './components/log-in/log-in.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { ShopCreateComponent } from './components/shop-create/shop-create.component';
 import { ShopProfileComponent } from './components/shop-profile/shop-profile.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserDirectionsComponent } from './components/user-directions/user-directions.component';
@@ -30,17 +31,20 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Google Maps
+import { MapsComponent } from './components/google-maps/google-maps.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
     LogInComponent,
+    MapsComponent,
+    NavbarComponent,
     SearchComponent,
     SearchResultsComponent,
-    NavbarComponent,
     ShopProfileComponent,
+    ShopCreateComponent,
+    SignUpComponent,
     UserProfileComponent,
     UserDirectionsComponent,
     UserMessagesComponent,

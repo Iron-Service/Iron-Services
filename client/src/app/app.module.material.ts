@@ -16,6 +16,8 @@ import {
   MatSelectModule,
   MatSlideToggleModule,
   MatSliderModule,
+  MatStepperModule,
+  MatInputModule
 
 } from "@angular/material";
 
@@ -31,10 +33,12 @@ import {
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatSliderModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule
 
   ],
   exports: [
@@ -47,11 +51,12 @@ import {
     MatFormFieldModule,
     MatGridListModule,
     MatIconModule,
+    MatInputModule,
     MatListModule,
     MatSelectModule,
     MatSliderModule,
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
+    MatStepperModule
   ],
   declarations: []
 })

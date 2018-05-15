@@ -1,11 +1,13 @@
-<mat-card class="shop" [routerLink]="['/shop', shopItem._id]">
-  <div class="col-6">
-    <mat-card-title>{{shopItem.name}}</mat-card-title>
-    <mat-card-subtitle>{{shopItem.direction}}</mat-card-subtitle>
-    <mat-chip-list>
-      <mat-chip *ngFor="let service of shopItem.serviceList">{{service.name}}</mat-chip>
-    </mat-chip-list>
+<mat-card class="shop d-flex flex-wrap" [routerLink]="['/shop', shopItem._id]">
+  <div class="col-12 d-flex">
+    <div class="col-md-6">
+      <mat-card-title>{{shopItem.name}}</mat-card-title>
+      <mat-card-subtitle>{{shopItem.direction}}</mat-card-subtitle>
+    </div>
+    <mat-card-content class="col-md-6">{{shopItem.description}}</mat-card-content>
   </div>
-  <mat-card-content class="col-6">{{shopItem.description}}</mat-card-content>
+  <mat-chip-list class="col-12">
+    <mat-chip *ngFor="let service of shopItem.serviceList">{{service.name}}</mat-chip>
+  </mat-chip-list>
 </mat-card>
 <!-- {{shopItem | json}} -->
