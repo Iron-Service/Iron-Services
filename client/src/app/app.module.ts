@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgmCoreModule } from '@agm/core';
 
 //  Services Imports
 import { AuthService } from './services/auth.service';
@@ -28,6 +29,8 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 //  Material imports
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// Google Maps
+
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserShopsComponent,
     UserFavoritesComponent,
     UrlPipe
+    
 ],
   imports: [
     BrowserModule,
@@ -52,7 +56,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyDOuYtitp5sloRqK-gEtMnF0Myng6DM4o0"
+    })
   ],
   providers: [AuthService, SearchService, ShopService],
   bootstrap: [AppComponent]

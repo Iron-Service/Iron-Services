@@ -110,12 +110,7 @@ const serviceList = [
   }
 ];
 
-const comments = [
-  { content: "blabla" },
-  { content: "blabla" },
-  { content: "blabla" },
-  { content: "blabla" }
-];
+
 const shop = [
   {
     name: "Hairdresser1",
@@ -248,6 +243,12 @@ Promise.all([
       user[0]
         .update({ $push: { shopsList: shop._id }, shop: true })
         .then(() => {});
+        const comments = [
+          {_author:user[0], content: "blabla" },
+          {_author:user[0], content: "blabla" },
+          {_author:user[0], content: "blabla" },
+          {_author:user[0], content: "blabla" }
+        ];
       Comment.create(comments, err => {
         if (err) {
           throw err;

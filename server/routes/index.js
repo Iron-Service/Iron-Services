@@ -9,21 +9,35 @@ const ensureLogedIn = require("../middlewares/ensureLogedIn");
 
 const s = {};
 
-
-
-router.get('/', (req, res, next) => {
-
-  
-
+router.get("/", (req, res, next) => {
   Shop.find()
-  .select({name:1, direction:1, serviceType:1, serviceList:1})
-  .then(
-    shop => {
+    .select({
+      name: 1,
+      direction: 1,
+      serviceType: 1,
+      serviceList: 1,
+      positive: 1,
+      negative: 1
+    })
+    .then(shop => {
       console.log(shop);
-      res.status(200).json(shop);}
-  )
-  .catch(err => res.status(500).json({message:err}));
+      res.status(200).json(shop);
+    })
+    .catch(err => res.status(500).json({ message: err }));
+});
 
+//ShopList
+router.get("/shopList", (req, res) => {
+  ShopList.find()
+    .then(shopList => res.status(200).json(shopList))
+    .catch(err => res.status(500).json({ message: err }));
+});
+
+//City
+router.get("/city", (req, res) => {
+  City.find()
+    .then(city => res.status(200).json(city))
+    .catch(err => res.status(500).json({ message: err }));
 });
 
 router.get("/:service", (req, res) => {
@@ -39,8 +53,7 @@ router.get("/:service", (req, res) => {
   max.priceMax = _.pickBy(max.priceMax, _.identity);
   if (max.priceMax.$lte == undefined) max = _.pickBy(max.priceMax, _.identity);
 
-  
-  if (req.query.name != undefined)
+  if (req.query.name != undefined && req.query.name != "")
     joker = {
       "serviceList.name": {
         $all: req.query.name.split(",")
@@ -55,13 +68,12 @@ router.get("/:service", (req, res) => {
       { serviceList: { $elemMatch: max } }
     ]
   })
-    .select({ name: 1, direction: 1, description: 1 })
+    .select({ name: 1, direction: 1, description: 1, serviceList: 1 })
     .then(shop => res.status(200).json(shop))
     .catch(err => json.status(500).json({ message: err }));
 });
 
 router.get("/search/:id", (req, res) => {
-  console.log(req.params.id);
   Shop.findOneAndUpdate(
     req.params.id,
     { $inc: { numVisits: +1 } },
@@ -77,7 +89,15 @@ router.get("/search/:id", (req, res) => {
       positive: 1,
       negative: 1
     })
-    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "_author",
+        select: "username",
+        model: "User"
+      }
+    })
+
     .then(shop => res.status(200).json(shop))
     .catch(err => res.status(500).json({ message: err }));
 });
@@ -87,17 +107,4 @@ router.get("/search/:id/:num", (req, res) => {
   Shop.findByIdAndUpdate(idShop);
 });
 
-//ShopList
-router.get("/shopList", (req, res) => {
-  ShopList.find()
-  .then(shopList => res.status(200).json(shopList))
-  .catch(err => res.status(500).json({message:err}));
-});
-
-//City
-router.get("/city", (req, res) => {
-  City.find()
-  .then(city => res.status(200).json(city))
-  .catch(err => res.status(500).json({message:err}));
-});
 module.exports = router;
