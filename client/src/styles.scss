@@ -48,7 +48,9 @@ span.small {
     font-size: 0.7rem;
 }
 
-
+.mat-form-field-infix{
+    position:static !important;
+}
 .backButton {
     position: absolute;
     top: 1rem;

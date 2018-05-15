@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { ShopService } from '../../services/shop.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,9 +9,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private authService:AuthService ) { }
+  constructor(private authService:AuthService, private shopService:ShopService ) { }
 
   ngOnInit() {
   }
-
+  createShop(shop){
+    this.shopService.createShop(shop).subscribe()
+  }
 }

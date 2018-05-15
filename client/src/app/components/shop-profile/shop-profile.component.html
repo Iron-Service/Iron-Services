@@ -6,19 +6,24 @@
       <mat-card-subtitle>Address: {{shop.direction.name}}</mat-card-subtitle>
       <mat-card-subtitle>Service Type: {{shop.serviceType}}</mat-card-subtitle>
       <!-- <mat-card-subtitle *ngIf="shop.direction.district">District: {{shop.direction.district}}</mat-card-subtitle> -->
-      <mat-card-content>{{shop.description}}</mat-card-content>
+      <mat-card-content class="col-8">{{shop.description}}</mat-card-content>
     </mat-card>
     <div class="d-flex">
-      <mat-card class="services">
+      <mat-card class="col-md-4">
         <mat-card-title>Services</mat-card-title>
         <mat-list role="list">
-          <mat-list-item role="listitem" *ngFor="let service of shop.serviceList">{{service.name}}           <span>{{service.priceMin}}</span>
-            <span *ngIf="priceMax">- {{service.priceMax}}</span>
-            <span> EUR</span>
+          <mat-list-item class="row " role="listitem" *ngFor="let service of shop.serviceList">
+            <strong>{{service.name}}</strong>
+            <span>
+              <span>{{service.priceMin}}</span>
+              <span *ngIf="priceMax">- {{service.priceMax}}</span>
+              <span> EUR</span>
+            </span>
           </mat-list-item>
         </mat-list>
       </mat-card>
-      <mat-card class="map"><app-map [direction]="shop.direction"></app-map> </mat-card>
+      <mat-card class="col-md-8">
+        <app-map [direction]="shop.direction" class="w-100"></app-map></mat-card>
     </div>
     <mat-card>
       <mat-card-title>Comments</mat-card-title>
