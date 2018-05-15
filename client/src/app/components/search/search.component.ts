@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { SearchService } from "../../services/search.service";
 import { FormControl } from "@angular/forms";
 import { ShopService } from "../../services/shop.service";
+import { QueryState_ } from "@angular/core/src/render3/query";
 
 @Component({
   selector: "app-search",
@@ -15,116 +16,43 @@ export class SearchComponent implements OnInit {
   services:string;
   type: string;
 
-  cities: Array<Object> = [
-    {
-      name: "Madrid",
-      districts: [
-        { name: "Centro" },
-        { name: "Arganzuela" },
-        { name: "Barajas" },
-        { name: "Carabanchel" },
-        { name: "Chamartín" },
-        { name: "Chamberí" },
-        { name: "Ciudad Lineal" },
-        { name: "Fuencarral-El Pardo" },
-        { name: "Hortaleza" },
-        { name: "Latina" },
-        { name: "Moncloa-Aravaca" },
-        { name: "Moratalaz" },
-        { name: "Puente de Vallecas" },
-        { name: "Retiro" },
-        { name: "Salamanca" },
-        { name: "San Blas" },
-        { name: "Tetuán" },
-        { name: "Usera" },
-        { name: "Vicálvaro" },
-        { name: "Villa de Vallecas" },
-        { name: "Villaverde" }
-      ]
-    }
-  ];
+  cities: Array<Object> = [];
 
-  shopList: Array<Object> = [
-    {
-      serviceType: "Hairdresser",
-      serviceList: [
-        { name: "Wet Cut" },
-        { name: "Dry Cut" },
-        { name: "Hair Up" },
-        { name: "Hair Up and Trial" },
-        { name: "Bridal Hair and Trial" },
-        { name: "Cut and Finish" },
-        { name: "Clipper Cut" },
-        { name: "Full Head Highlights" },
-        { name: "Full Head Bleach" },
-        { name: "Tonal Glossing" },
-        { name: "Balayage" },
-        { name: "Roots Tint" },
-        { name: "T-Section Highlights" },
-        { name: "Gents' Highlights" }
-      ]
-    },
-    {
-      serviceType: "Mechanic",
-      serviceList: [
-        { name: "Brake & Clutch" },
-        { name: "Car Electrical" },
-        { name: "Suspension & Steering" },
-        { name: "Cooling System & Overheating" },
-        { name: "Engine Work & Tuning" },
-        { name: "Fuel Injection" }
-      ]
-    },
-    {
-      serviceType: "Tailor",
-      serviceList: [
-        { name: "Skirts" },
-        { name: "Dresses" },
-        { name: "Trousers" },
-        { name: "Jackets" },
-        { name: "Coats" },
-        { name: "Shirts / Blouses" },
-        { name: "Miscellaneous" }
-      ]
-    },
-    {
-      serviceType: "Photographer",
-      serviceList: [
-        { name: "Portrait Photography" },
-        { name: "Corporate Portrait" },
-        { name: "Event Photography" },
-        { name: "Artists and public figures" },
-        { name: "Architectural photography" },
-        { name: "Beauty and fashion photography" },
-        { name: "The body and artistic nudes" }
-      ]
-    },
-    {
-      serviceType: "Driving Courses",
-      serviceList: [
-        { name: "Car License" },
-        { name: "Motorcycle License" },
-        { name: "Commercial License" },
-        { name: "Heavy Trailer Endorsement" },
-        { name: "Heavy RVs License" },
-        { name: "Riding mopeds and scooters" }
-      ]
-    }
-  ];
+  shopList: Array<Object> = [];
   
   constructor(
     private shopService: ShopService,
     private searchService: SearchService,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this.searchService.getCity().subscribe( list => {
+      this.cities = list;
+    })
+    this.searchService.getShopTypes().subscribe( list => {
+      this.shopList = list;
+    })
+  }
 
   ngOnInit() {}
   getListEvent(queryForm) {
-    console.log(queryForm)
-    this.searchService.getListEvent(queryForm).subscribe( () => {
-      console.log(typeof queryForm.form.value)
-      this.shopsData = [queryForm.form.value];
+    const obj = queryForm.form.value
+    let query = `${obj.type}?`
+    for( let key in obj ){
+      if(obj[key] != obj.type && obj[key] != undefined && obj[key] != true  && obj[key] != false)
+      query+=`${key}=${obj[key]},`
+    }
+    query+= "&name="
+    for(let key in obj){
+      if(obj[key] == true)
+      query += `${key},`
+    }
+    query = query.substr(0,query.length-1)
+    console.log(query)
+    this.searchService.getListEvent(query).subscribe( query => {
+      console.log(query)
+      this.shopsData = query;
     });
   }
+  
 }

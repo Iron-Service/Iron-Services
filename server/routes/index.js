@@ -56,9 +56,10 @@ router.get("/:service", (req, res) => {
   if (req.query.name != undefined && req.query.name != "")
     joker = {
       "serviceList.name": {
-        $all: req.query.name.split(",")
+        $all: decodeURIComponent(req.query.name).split(",")
       }
     };
+  
 
   Shop.find({
     $and: [
@@ -97,7 +98,6 @@ router.get("/search/:id", (req, res) => {
         model: "User"
       }
     })
-
     .then(shop => res.status(200).json(shop))
     .catch(err => res.status(500).json({ message: err }));
 });

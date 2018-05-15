@@ -244,10 +244,10 @@ Promise.all([
         .update({ $push: { shopsList: shop._id }, shop: true })
         .then(() => {});
         const comments = [
-          {_author:user[0], content: "blabla" },
-          {_author:user[0], content: "blabla" },
-          {_author:user[0], content: "blabla" },
-          {_author:user[0], content: "blabla" }
+          {_author:user[0]._id, content: "blabla" },
+          {_author:user[0]._id, content: "blabla" },
+          {_author:user[0]._id, content: "blabla" },
+          {_author:user[0]._id, content: "blabla" }
         ];
       Comment.create(comments, err => {
         if (err) {
