@@ -3,9 +3,19 @@ const Schema   = mongoose.Schema;
 
 const shopSchema = new Schema({
   name: {type:String, required:true},
-  direction: String,
   description: String,
-  date: [{type:Date}],
+  direction: {
+    address:String,
+    lat: Number,
+    lng: Number,
+  },
+  date: [{
+    name: String,
+    amOp: String,
+    amCl: String,
+    pmOp: String,
+    pmCl: String
+  }],
   serviceType:{
     type:String, 
     enum:['Hairdresser', "Mechanic", "Tailor", "Photographer", "Driving Courses"],

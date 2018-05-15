@@ -32,7 +32,6 @@ router.post("/shop/:id", (req, res) => {
   const _shop = req.params.id;
   const comment = { _author, _shop, content };
   Comment.create(comment, (err, arrayComment) => {
-    console.log(arrayComment);
     if (err)
       return res.status(400).json({ message: "Unable to fetch new comment" });
     return Promise.all([

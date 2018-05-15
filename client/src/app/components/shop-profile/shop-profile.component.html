@@ -3,7 +3,7 @@
     <mat-card>
       <button (click)="backClicked()">Go Back</button>
       <mat-card-title>{{shop.name}}</mat-card-title>
-      <mat-card-subtitle>Address: {{shop.direction}}</mat-card-subtitle>
+      <mat-card-subtitle>Address: {{shop.direction.name}}</mat-card-subtitle>
       <mat-card-subtitle>Service Type: {{shop.serviceType}}</mat-card-subtitle>
       <!-- <mat-card-subtitle *ngIf="shop.direction.district">District: {{shop.direction.district}}</mat-card-subtitle> -->
       <mat-card-content>{{shop.description}}</mat-card-content>
@@ -18,7 +18,7 @@
           </mat-list-item>
         </mat-list>
       </mat-card>
-      <mat-card class="map"><!--AQUI EL MAPA --> </mat-card>
+      <mat-card class="map"><app-map [direction]="shop.direction"></app-map> </mat-card>
     </div>
     <mat-card>
       <mat-card-title>Comments</mat-card-title>

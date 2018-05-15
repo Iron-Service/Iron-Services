@@ -27,7 +27,6 @@ router.post("/create/:id", (req, res) => {
 
   return newMessage.save()
   .then(m => {
-    console.log(m._id);
     return Promise.all([
       User.findByIdAndUpdate(req.user.id, {$push:{messages:m._id}}),
       Shop.findByIdAndUpdate(req.params.id, {$push:{messages:m._id}})]
@@ -49,7 +48,6 @@ router.post("/create/:id/shop/:idu", (req, res) => {
 
   return newMessage.save()
   .then(m => {
-    console.log(m._id);
     return Promise.all([
       User.findByIdAndUpdate(req.params.idu, {$push:{messages:m._id}}),
       Shop.findByIdAndUpdate(req.params.id, {$push:{messages:m._id}})]

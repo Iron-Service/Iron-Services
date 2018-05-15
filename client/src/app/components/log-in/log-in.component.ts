@@ -15,7 +15,7 @@ export class LogInComponent {
   constructor(public authService: AuthService, public router: Router) {}
 
   logIn() {
-    console.log(this.username, this.password);
+    (this.username, this.password);
     this.authService
       .logIn(this.username, this.password)
       .subscribe(() => this.router.navigate(["/search"]));

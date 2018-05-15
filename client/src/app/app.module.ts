@@ -29,6 +29,7 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 //  Material imports
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MapsComponent } from './components/google-maps/google-maps.component';
 // Google Maps
 
 
@@ -39,6 +40,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LogInComponent,
     SearchComponent,
     SearchResultsComponent,
+    MapsComponent,
     NavbarComponent,
     ShopProfileComponent,
     UserProfileComponent,

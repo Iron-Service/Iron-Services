@@ -19,10 +19,8 @@ router.get("/", (req, res, next) => {
       positive: 1,
       negative: 1
     })
-    .then(shop => {
-      console.log(shop);
-      res.status(200).json(shop);
-    })
+    .then(shop => res.status(200).json(shop)
+    )
     .catch(err => res.status(500).json({ message: err }));
 });
 

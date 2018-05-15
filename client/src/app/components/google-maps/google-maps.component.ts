@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.css'],
+  selector: 'app-map',
+  templateUrl: './google-maps.component.html',
+  styleUrls: ['./google-maps.component.scss'],
 })
-export class AppComponent {
-  title: string = 'My first AGM project';
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+export class MapsComponent  implements OnInit {
+  @Input() direction: any;
+  lat: number = this.direction.lat;
+  lng: number = this.direction.lng;
+  zoom:number = 18;
+
+  ngOnInit(){
+  }
 }

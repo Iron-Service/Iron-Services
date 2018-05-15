@@ -115,7 +115,11 @@ const shop = [
   {
     name: "Hairdresser1",
     description: "oandosadpasmd",
-    direction: "a",
+    direction:{
+      address: "a",
+      lat:40.391746, 
+      lng:-3.697098
+    },
     serviceType: "Hairdresser",
     serviceList: [
       {
@@ -131,7 +135,11 @@ const shop = [
   {
     name: "Hairdresser2",
     description: "oandosadpasmd",
-    direction: "b",
+    direction: {
+      address: "b",
+      lat:40.396372, 
+      lng:-3.700283
+    },
     serviceType: "Hairdresser",
     serviceList: [
       {
@@ -151,7 +159,11 @@ const shop = [
   {
     name: "Hairdresser3",
     description: "oandosadpasmd",
-    direction: "c",
+    direction: {
+      address: "c",
+      lat:40.396372, 
+      lng:-3.700283
+    },
     serviceType: "Hairdresser",
     serviceList: [
       {
@@ -171,7 +183,11 @@ const shop = [
   {
     name: "Mechanic1",
     description: "oandosadpasmd",
-    direction: "d",
+    direction: {
+      address: "d",
+      lat:40.391746, 
+      lng:-3.697098
+    },
     serviceType: "Mechanic",
     serviceList: [
       {
@@ -187,7 +203,11 @@ const shop = [
   {
     name: "Mechanic2",
     description: "oandosadpasmd",
-    direction: "e",
+    direction: {
+      address: "e",
+      lat:40.396372, 
+      lng:-3.700283
+    },
     serviceType: "Mechanic",
     serviceList: [
       {
@@ -199,7 +219,11 @@ const shop = [
   {
     name: "Mechanic3",
     description: "oandosadpasmd",
-    direction: "f",
+    direction: {
+      address: "f",
+      lat:40.396372, 
+      lng:-3.700283
+    },
     serviceType: "Mechanic",
     serviceList: [      
       {

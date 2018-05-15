@@ -48,11 +48,8 @@ export class SearchComponent implements OnInit {
       query += `${key},`
     }
     query = query.substr(0,query.length-1)
-    console.log(query)
-    this.searchService.getListEvent(query).subscribe( query => {
-      console.log(query)
-      this.shopsData = query;
-    });
+    this.searchService.getListEvent(query).subscribe( query => this.shopsData = query
+    );
   }
   
 }
