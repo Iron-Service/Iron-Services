@@ -36,6 +36,7 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {}
   getListEvent(queryForm) {
+    console.log(queryForm)
     const obj = queryForm.form.value
     let query = `${obj.type}?`
     for( let key in obj ){
@@ -48,6 +49,7 @@ export class SearchComponent implements OnInit {
       query += `${key},`
     }
     query = query.substr(0,query.length-1)
+
     this.searchService.getListEvent(query).subscribe( query => this.shopsData = query
     );
   }
