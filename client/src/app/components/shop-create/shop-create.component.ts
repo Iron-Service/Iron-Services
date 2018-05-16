@@ -10,6 +10,16 @@ import {
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
 
+interface Day {
+  name: String;
+  open: Boolean;
+  evening: Boolean;
+  amOp: String;
+  amCl: String;
+  pmOp: String;
+  pmCl: String;
+}
+
 @Component({
   selector: "app-shop-create",
   templateUrl: "./shop-create.component.html",
@@ -22,14 +32,21 @@ export class ShopCreateComponent implements OnInit {
   formGroup: FormGroup;
   shopList: Array<Object> = [];
   type: string;
-  days: Array<Object> = [
-    { name: "Monday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
-    { name: "Tuesday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
-    { name: "Wednesday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
-    { name: "Thursday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
-    { name: "Friday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
-    { name: "Saturday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
-    { name: "Sunday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String }
+  name: string;
+  description:string;
+  list:any;
+  amOp:any;
+  amCl:any;
+  pmOp:any;
+  pmCl:any;
+  days: Array<Day> = [
+    { name: "Monday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: "" },
+    { name: "Tuesday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: "" },
+    { name: "Wednesday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: ""  },
+    { name: "Thursday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: ""  },
+    { name: "Friday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: "" },
+    { name: "Saturday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: ""  },
+    { name: "Sunday", open: false, evening: false, amOp: "", amCl: "", pmOp: "", pmCl: "" }
   ];
   hours: Array<String> = [
     "00","01","02","03","04","05","06","07",
@@ -63,8 +80,22 @@ export class ShopCreateComponent implements OnInit {
     this._location.back();
   }
   submit(shopForm){
-    this.shopService.createShop(shopForm).subscribe(query => {
-      console.log(query)
+    const obj = shopForm.form.value
+    console.log(obj)
+    let query = `${obj.type}?`
+    for( let key in obj ){
+      if(obj[key] != obj.type && obj[key] != undefined && obj[key] != true  && obj[key] != false)
+      query+=`${key}=${obj[key]},`
+    }
+    query+= "&name="
+    for(let key in obj){
+      if(obj[key] == true)
+      query += `${key},`
+    }
+    query = query.substr(0,query.length-1)
+    console.log("EEEEEEEEEE", shopForm)
+    console.log(this.amOp, this.amCl)
+    this.shopService.createShop(shopForm.form.value).subscribe(query => {
       this.shopData = query})
     }
     direction(event){
