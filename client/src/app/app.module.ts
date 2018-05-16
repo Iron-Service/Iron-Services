@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AgmCoreModule } from '@agm/core';
 
 //  Services Imports
 import { AuthService } from './services/auth.service';
@@ -31,17 +30,20 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Google Maps
+import { AgmCoreModule } from '@agm/core';
 import { MapsComponent } from './components/google-maps/google-maps.component';
-
+import { SearchGoogleMapsComponent } from './components/search-google-maps/search-google-maps.component';
+import { AngularGooglePlaceModule } from 'angular-google-place';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    MapsComponent,
-    NavbarComponent,
     SearchComponent,
     SearchResultsComponent,
+    MapsComponent,
+    SearchGoogleMapsComponent,
+    NavbarComponent,
     ShopProfileComponent,
     ShopCreateComponent,
     SignUpComponent,
@@ -62,8 +64,10 @@ import { MapsComponent } from './components/google-maps/google-maps.component';
     HttpModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDOuYtitp5sloRqK-gEtMnF0Myng6DM4o0"
-    })
+      apiKey: "AIzaSyDOuYtitp5sloRqK-gEtMnF0Myng6DM4o0",
+      libraries: ["places"]
+    }),
+    AngularGooglePlaceModule
   ],
   providers: [AuthService, SearchService, ShopService],
   bootstrap: [AppComponent]

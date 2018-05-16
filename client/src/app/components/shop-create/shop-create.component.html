@@ -5,21 +5,22 @@
     <mat-horizontal-stepper [linear]="true" #stepper>
       <mat-step label="Basics">
         <mat-form-field class="col-md-4">
-          <input matInput placeholder="Shop Name" rows="4">
+          <input matInput placeholder="Shop Name">
         </mat-form-field>
         <mat-form-field class="col-md-4">
           <mat-select placeholder="Service Type" name="type" [(ngModel)]="type">
             <mat-option *ngFor="let list of shopList" [value]="[list.serviceType]">{{list.serviceType}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="col-12">
-          <input matInput placeholder="Address" rows="4">
-        </mat-form-field>
+        <p>Address</p>
+          <app-search-google-maps (Directon)=direction($event)>
+          </app-search-google-maps>
         <mat-form-field class="col-12">
           <textarea matInput placeholder="Description" rows="4"></textarea>
         </mat-form-field>
         <div class="col-12">
-          <!-- Here be map, or not -->
+          <app-map></app-map>
+          
         </div>
         <div>
           <button mat-button matStepperNext type="button">Next</button>
@@ -97,6 +98,7 @@
       </mat-step>
       <mat-step label="Confirm">
           <div class="d-flex justify-content-between">
+            {{shopForm | json}}
             <button mat-button matStepperPrevious type="button">Back</button>
             <button mat-button type="submit">Submit</button>
           </div>
@@ -104,3 +106,6 @@
     </mat-horizontal-stepper>
   </form>
 </mat-card>
+<div *ngIf="Directon">
+  Pepe
+</div>

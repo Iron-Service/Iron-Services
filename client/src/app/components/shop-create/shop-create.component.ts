@@ -23,13 +23,13 @@ export class ShopCreateComponent implements OnInit {
   shopList: Array<Object> = [];
   type: string;
   days: Array<Object> = [
-    { name: "Monday", open: false, evening: false },
-    { name: "Tuesday", open: false, evening: false },
-    { name: "Wednesday", open: false, evening: false },
-    { name: "Thursday", open: false, evening: false },
-    { name: "Friday", open: false, evening: false },
-    { name: "Saturday", open: false, evening: false },
-    { name: "Sunday", open: false, evening: false }
+    { name: "Monday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
+    { name: "Tuesday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
+    { name: "Wednesday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
+    { name: "Thursday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
+    { name: "Friday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String },
+    { name: "Saturday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String  },
+    { name: "Sunday", open: false, evening: false, amOp: String, amCl: String, pmOp: String, pmCl: String }
   ];
   hours: Array<String> = [
     "00","01","02","03","04","05","06","07",
@@ -39,12 +39,9 @@ export class ShopCreateComponent implements OnInit {
   minutes: Array<String> = [
     "00", "15", "30", "45"
   ]
-  openings: Array<Object> = [{
-    amOp: String,
-    amCl: String,
-    pmOp: String,
-    pmCl: String
-  }]
+
+  Direction: Object;
+  
 
   get formArray(): AbstractControl | null {
     return this.formGroup.get("formArray");
@@ -65,9 +62,13 @@ export class ShopCreateComponent implements OnInit {
   backClicked() {
     this._location.back();
   }
-  submit(form){
-    this.shopService.createShop(form).subscribe(query => {
+  submit(shopForm){
+    this.shopService.createShop(shopForm).subscribe(query => {
       console.log(query)
       this.shopData = query})
+    }
+    direction(event){
+    console.log(event)
+    this.Direction = event
   }
 }
