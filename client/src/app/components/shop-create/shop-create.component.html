@@ -19,32 +19,88 @@
           <textarea matInput placeholder="Description" rows="4"></textarea>
         </mat-form-field>
         <div class="col-12">
-          <app-map></app-map>
+          <!-- Here be map, or not -->
         </div>
         <div>
-          <button mat-button matStepperPrevious type="button">Back</button>
           <button mat-button matStepperNext type="button">Next</button>
         </div>
       </mat-step>
       <mat-step label="Services">
         <div class="justify-content-start" *ngFor="let group of shopList; let j = index">
           <div class="row" *ngIf="type == shopList[j].serviceType">
-              <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" [(ngModel)]="list.name.selected" name={{list.name}}>
-                {{list.name}}</mat-checkbox>
-            </div>
+            <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" [(ngModel)]="list.name.selected"
+              name={{list.name}}>
+              {{list.name}}</mat-checkbox>
+          </div>
         </div>
-        <div>
+        <div class="d-flex justify-content-between">
           <button mat-button matStepperPrevious type="button">Back</button>
           <button mat-button matStepperNext type="button">Next</button>
         </div>
       </mat-step>
       <mat-step label="Opening Hours">
-        <input matInput type="time">
-        <div>
+        <div *ngFor="let day of days;let i = index" class="d-flex justify-content-start">
+          <mat-checkbox class="col-md-4 col-lg-2" name="days" [value]="day.open.value" [(ngModel)]="day.open">{{days[i].name}}</mat-checkbox>
+          <div *ngIf="day.open" class="d-flex justify-content-start">
+            <div>
+              <label>From:
+                <div class="d-flex time">
+                  <mat-select [(ngModel)]="openings.amOp" name="amOp">
+                    <mat-option *ngFor="let hour of hours" [value]="openings.amOp">{{hour}}</mat-option>
+                  </mat-select>
+                  <mat-select [(ngModel)]="openings.amOp" name="amOp">
+                    <mat-option *ngFor="let minute of minutes" [value]="openings.amOp">{{minute}}</mat-option>
+                  </mat-select>
+                </div>
+              </label>
+              <label>To:
+                <div class="d-flex time">
+                  <mat-select [(ngModel)]="openings.amCl" name="amCl">
+                    <mat-option *ngFor="let hour of hours" [value]="openings.amCl">{{hour}}</mat-option>
+                  </mat-select>
+                  <mat-select [(ngModel)]="openings.amCl" name="amCl">
+                    <mat-option *ngFor="let minute of minutes" [value]="openings.amCl">{{minute}}</mat-option>
+                  </mat-select>
+                </div>
+              </label>
+            </div>
+            <div  *ngIf="day.evening">
+              <label>From:
+                  <div class="d-flex time">
+                      <mat-select [(ngModel)]="openings.pmOp" name="pmOp">
+                        <mat-option *ngFor="let hour of hours" [value]="openings.pmOp">{{hour}}</mat-option>
+                      </mat-select>
+                      <mat-select [(ngModel)]="openings.pmOp" name="pmOp">
+                        <mat-option *ngFor="let minute of minutes" [value]="openings.pmOp">{{minute}}</mat-option>
+                      </mat-select>
+                    </div>
+              </label>
+              <label>To:
+                  <div class="d-flex time">
+                    <mat-select [(ngModel)]="openings.pmCl" name="pmCl">
+                      <mat-option *ngFor="let hour of hours" [value]="openings.pmCl">{{hour}}</mat-option>
+                    </mat-select>
+                    <mat-select [(ngModel)]="openings.pmCl" name="pmCl">
+                      <mat-option *ngFor="let minute of minutes" [value]="openings.pmCl">{{minute}}</mat-option>
+                    </mat-select>
+                  </div>
+              </label>
+            </div>
+            <mat-checkbox name="evening" [value]="day.evening.value" [(ngModel)]="day.evening">Split service </mat-checkbox>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
           <button mat-button matStepperPrevious type="button">Back</button>
           <button mat-button matStepperNext type="button">Next</button>
         </div>
       </mat-step>
+      <mat-step label="Confirm">
+          <div class="d-flex justify-content-between">
+            <button mat-button matStepperPrevious type="button">Back</button>
+            <button mat-button type="submit">Submit</button>
+          </div>
+        </mat-step>
     </mat-horizontal-stepper>
   </form>
 </mat-card>

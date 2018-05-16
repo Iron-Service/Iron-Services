@@ -30,7 +30,6 @@ import { UserFavoritesComponent } from './components/user-favorites/user-favorit
 //  Material imports
 import { AppMaterialModule } from './app.module.material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapsComponent } from './components/google-maps/google-maps.component';
 // Google Maps
 import { MapsComponent } from './components/google-maps/google-maps.component';
 
@@ -43,11 +42,6 @@ import { MapsComponent } from './components/google-maps/google-maps.component';
     NavbarComponent,
     SearchComponent,
     SearchResultsComponent,
-<<<<<<< HEAD
-    MapsComponent,
-    NavbarComponent,
-=======
->>>>>>> dd80756acc9d2ad39ad7a654345c903c411769a0
     ShopProfileComponent,
     ShopCreateComponent,
     SignUpComponent,
