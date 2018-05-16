@@ -29,6 +29,7 @@ export class ShopCreateComponent implements OnInit {
     "Saturday",
     "Sunday"
   ];
+  Direction: Object;
   
 
   get formArray(): AbstractControl | null {
@@ -48,5 +49,10 @@ export class ShopCreateComponent implements OnInit {
   ngOnInit() {}
   backClicked() {
     this._location.back();
+  }
+
+  direction(event){
+    console.log(event)
+    this.Direction = event
   }
 }

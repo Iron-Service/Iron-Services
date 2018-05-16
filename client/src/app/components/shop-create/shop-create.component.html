@@ -12,14 +12,17 @@
             <mat-option *ngFor="let list of shopList" [value]="[list.serviceType]">{{list.serviceType}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field class="col-12">
-          <input matInput placeholder="Address" rows="4">
-        </mat-form-field>
+          <mat-card>
+            <app-search-google-maps (Directon)=direction($event)></app-search-google-maps>
+
+          </mat-card>
+        
         <mat-form-field class="col-12">
           <textarea matInput placeholder="Description" rows="4"></textarea>
         </mat-form-field>
         <div class="col-12">
           <app-map></app-map>
+          
         </div>
         <div>
           <button mat-button matStepperPrevious type="button">Back</button>
@@ -48,3 +51,6 @@
     </mat-horizontal-stepper>
   </form>
 </mat-card>
+<div *ngIf="Directon">
+  Pepe
+</div>

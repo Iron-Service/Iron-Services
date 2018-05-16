@@ -7,8 +7,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MapsComponent  implements OnInit {
   @Input() direction: any;
-  lat: number = this.direction.lat;
-  lng: number = this.direction.lng;
+  lat: number;
+  lng: number;
   zoom:number = 18;
 
   ngOnInit(){

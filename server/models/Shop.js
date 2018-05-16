@@ -5,16 +5,19 @@ const shopSchema = new Schema({
   name: {type:String, required:true},
   description: String,
   direction: {
+    city:String,
     address:String,
     lat: Number,
     lng: Number,
   },
   date: [{
     name: String,
-    amOp: String,
-    amCl: String,
-    pmOp: String,
-    pmCl: String
+    amOp: Date,
+    amCl: Date,
+    pm: {type:Boolean, default:false},
+    pmOp: Date,
+    pmCl: Date,
+    open: {type:Boolean, default:false}
   }],
   serviceType:{
     type:String, 
