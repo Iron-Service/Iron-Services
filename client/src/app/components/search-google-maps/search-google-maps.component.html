@@ -1,3 +1,11 @@
 
-        <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+        <input matInput id="input" placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
             #search [formControl]="searchControl">
+    <script type="text/javascript">
+        console.log("Pepe")
+    var input = document.getElemantById('input');
+    event.addDomListener(input, "keydown", event => if(event.keyCode === 13) {
+        console.log("pepe")
+        event.prevenDefault()};);
+    })
+    </script>

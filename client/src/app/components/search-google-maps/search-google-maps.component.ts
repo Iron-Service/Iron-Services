@@ -3,17 +3,30 @@ import { FormControl } from '@angular/forms';
 import { } from 'googlemaps';
 import { MapsAPILoader } from '@agm/core';
 
+interface Direction{
+  lat:number,
+  lng:number,
+  address:string,
+  city:string
+}
+
+
 @Component({
   selector: "app-search-google-maps",
   templateUrl: "./search-google-maps.component.html",
   styleUrls: ["./search-google-maps.component.scss"]
 })
+
+
 export class SearchGoogleMapsComponent implements OnInit {
-  
+
+  dir:Direction = {
+    lat:0,
+    lng:0,
+    address:"",
+    city:""
+  };
   searchControl: FormControl;
-  direction:Object = {
-    lat:Number
-  }
   latitude: number;
   longitude: number;
 
@@ -24,6 +37,7 @@ export class SearchGoogleMapsComponent implements OnInit {
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
   ) {}
+  @Output() Dir = new EventEmitter<Object>();
   ngOnInit(){
     this.searchControl = new FormControl();
 
@@ -41,9 +55,13 @@ export class SearchGoogleMapsComponent implements OnInit {
             return;
           }
           console.log(place)
-
-          this.direction = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
+          
+          this.dir.lat = place.geometry.location.lat();
+          this.dir.lng = place.geometry.location.lng();
+          this.dir.city = place.vicinity;
+          this.dir.address = place.name;
+          this.Dir.emit(this.dir);
+          
         });
       });
     });

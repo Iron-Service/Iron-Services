@@ -13,13 +13,13 @@
           </mat-select>
         </mat-form-field>
         <p>Address</p>
-          <app-search-google-maps (Directon)=direction($event)>
+          <app-search-google-maps (Dir)=direction($event)>
           </app-search-google-maps>
         <mat-form-field class="col-12">
           <textarea matInput placeholder="Description" rows="4"></textarea>
         </mat-form-field>
         <div class="col-12">
-          <app-map></app-map>
+          <app-map [direction]="Direction"></app-map>
           
         </div>
         <div>
@@ -98,7 +98,7 @@
       </mat-step>
       <mat-step label="Confirm">
           <div class="d-flex justify-content-between">
-            {{shopForm | json}}
+            <!-- {{shopForm | json}} -->
             <button mat-button matStepperPrevious type="button">Back</button>
             <button mat-button type="submit">Submit</button>
           </div>

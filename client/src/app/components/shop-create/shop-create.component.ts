@@ -63,7 +63,7 @@ export class ShopCreateComponent implements OnInit {
     this._location.back();
   }
   submit(shopForm){
-    this.shopService.createShop(shopForm).subscribe(query => {
+    this.shopService.createShop({}).subscribe(query => {
       console.log(query)
       this.shopData = query})
     }
