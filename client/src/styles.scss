@@ -21,7 +21,7 @@ button {
     border: none;
     background: indigo;
     color: whitesmoke;
-    padding: 1rem 1rem;
+    padding: 0.8rem;
     transition: all 0.3s ease-in;
     margin: 0;
     &:hover {
@@ -64,4 +64,8 @@ span.small {
         background: rgb(79, 115, 151);
     }
 }
+.navbar-nav{
+    justify-content: center;
+}
+
 

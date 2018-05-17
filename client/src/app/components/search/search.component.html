@@ -1,38 +1,60 @@
 <mat-card class="col-md-8 offset-md-2">
   <form (ngSubmit)="getListEvent(queryForm)" #queryForm="ngForm">
-  <mat-form-field class="col-md-3">
-    <mat-select placeholder="City" [(ngModel)]=city name="city" >
-      <mat-option *ngFor="let city of cities; let i = index" value={{city.name}} (click)="passIndex(i)">{{city.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="col-md-3" *ngIf="city">
-    <mat-select placeholder="District" [(ngModel)]="district" name="district">
-      <mat-option *ngFor="let district of cities[cityIndex].districts" value={{district.name}}>{{district.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field class="col-md-3" *ngIf="city">
-    <mat-select placeholder="Service Type" [(ngModel)]="type" name="type">
-      <mat-option *ngFor="let list of shopList" value={{list.serviceType}}>{{list.serviceType}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-accordion *ngIf="type">
-    <mat-expansion-panel [style.backgroundColor]="'#e6e6ff'">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Services
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div class="justify-content-start" *ngFor="let group of shopList; let j = index">
-        <div class="row" *ngIf="type === shopList[j].serviceType">
-          <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" name={{list.name}} [(ngModel)]="list.name.selected">
-            {{list.name}}</mat-checkbox>
+    <mat-form-field class="col-md-3">
+      <mat-select placeholder="City" [(ngModel)]=city name="city">
+        <mat-option *ngFor="let city of cities; let i = index" value={{city.name}} (click)="passIndex(i)">{{city.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-3" *ngIf="city">
+      <mat-select placeholder="District" [(ngModel)]="district" name="district">
+        <mat-option *ngFor="let district of cities[cityIndex].districts" value={{district.name}}>{{district.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-md-3" *ngIf="city">
+      <mat-select placeholder="Service Type" [(ngModel)]="type" name="type">
+        <mat-option *ngFor="let list of shopList" value={{list.serviceType}}>{{list.serviceType}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-accordion *ngIf="city">
+      <mat-expansion-panel [style.backgroundColor]="'#e6e6ff'">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Prices
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="justify-content-start">
+          <mat-form-field class="col-md-3">
+            <input type="number" placeholder="Min" matInput min="0" max="200" name="priceMin" [(ngModel)]="priceMin" [lte]="priceMax">
+            <mat-error *ngIf="priceMin.errors?.lte&&priceMin!=null">Value needs to be lower than Max</mat-error>
+            <mat-hint>Value: 1-200</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <input type="number" placeholder="Max" matInput min="0" max="200" name="priceMax" [(ngModel)]="priceMax" [gte]="priceMin">
+            <mat-error *ngIf="priceMax.errors?.gte&&priceMax!=null">Value needs to be higher than Min</mat-error>
+            <mat-hint>Value: 1-200</mat-hint>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion *ngIf="type">
+      <mat-expansion-panel [style.backgroundColor]="'#e6e6ff'">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Services
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="justify-content-start" *ngFor="let group of shopList; let j = index">
+          <div class="row" *ngIf="type === shopList[j].serviceType">
+            <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" name={{list.name}} [(ngModel)]="list.name.selected">
+              {{list.name}}</mat-checkbox>
           </div>
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-    <button type="submit" class="align-self-end col-md-3">Search</button>
+    <button type="submit" class="align-self-end col-md-2">Search</button>
   </form>
 </mat-card>
-  <mat-card *ngFor="let shop of shopsData" class="col-md-8 offset-md-2">
-    <app-search-results [shopItem]="shop"></app-search-results>
+<mat-card *ngFor="let shop of shopsData" class="col-md-8 offset-md-2">
+  <app-search-results [shopItem]="shop"></app-search-results>
 </mat-card>

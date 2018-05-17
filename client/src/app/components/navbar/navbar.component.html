@@ -19,7 +19,7 @@
                 <h1 class="nav title" *ngIf="!('/.\//g.test(router.url)')"> {{router.url | url | uppercase}}</h1>
             </div>
         </div>
-        <ul class="nav navbar-nav align-self-end" routerLinkActive="active">
+        <ul class="nav navbar-nav" routerLinkActive="active">
             <li class="nav-item logout">
                 <a *ngIf="authService.user"  routerLink="search" (click)="logOut()" class="nav-link">Log out</a>
                 <a *ngIf="!authService.user" routerLink="login" class="nav-link">Log in</a>

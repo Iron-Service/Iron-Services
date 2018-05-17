@@ -2,9 +2,15 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { SearchService } from "../../services/search.service";
-import { FormControl } from "@angular/forms";
 import { ShopService } from "../../services/shop.service";
 import { QueryState_ } from "@angular/core/src/render3/query";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+  FormControl
+} from "@angular/forms";
 
 @Component({
   selector: "app-search",
@@ -12,6 +18,10 @@ import { QueryState_ } from "@angular/core/src/render3/query";
   styleUrls: ["./search.component.scss"]
 })
 export class SearchComponent implements OnInit {
+  shopFormControl = new FormControl("", [
+    Validators.required,
+    Validators.minLength(3)
+  ]);
   shopsData: any;
   services:string;
   type: string;
@@ -19,7 +29,9 @@ export class SearchComponent implements OnInit {
   cities: Array<Object> = [];
   cityIndex: any;
   shopList: Array<Object> = [];
-  
+  priceMin: Number = 0;
+  priceMax: Number = 0;
+
   constructor(
     private shopService: ShopService,
     private searchService: SearchService,
@@ -41,7 +53,7 @@ export class SearchComponent implements OnInit {
     let query = `${obj.type}?`
     for( let key in obj ){
       if(obj[key] != obj.type && obj[key] != undefined && obj[key] != true  && obj[key] != false)
-      query+=`${key}=${obj[key]},`
+      query+=`${key}=${obj[key]}&`
     }
     query+= "&name="
     for(let key in obj){
