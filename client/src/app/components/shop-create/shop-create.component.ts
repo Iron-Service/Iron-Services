@@ -10,7 +10,6 @@ import {
 } from "@angular/forms";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
-import { Direction } from "../search-google-maps/search-google-maps.component";
 
 interface Date {
   name: String;
@@ -33,7 +32,6 @@ interface ServiceType {
 interface Service {
   name: String;
   description: String;
-  direction: Direction;
   date: Date;
   serviceType: ServiceType;
   serviceList: ServiceList;
@@ -193,20 +191,22 @@ export class ShopCreateComponent implements OnInit {
   }
   submit(shopForm) {
     const obj = shopForm.form.value;
-    console.log(obj);
+    
     const { name, description, serviceType } = shopForm.form.value;
+    let newserviceList = [];
+    for (let i = 0; i < this.serviceList.length; i++) {
+      if(this.serviceList[i].priceMin != 0) newserviceList.push(this.serviceList[i])
+    }
+    let cont = 0;
     let serviceList = [];
     for (let key in obj) {
-      if (obj[key] == true && key.indexOf("date") === -1)
-        serviceList.push({ name: key, priceMin: 10 });
+      if (obj[key] == true && key.indexOf("date") === -1){    
+        newserviceList[cont].name = key;
+        serviceList.push(newserviceList[cont])
+        cont++;
+      }
     }
-<<<<<<< HEAD
-    const date = this.date
-    console.log(date)
-=======
-    console.log(serviceList);
     const date = this.date;
->>>>>>> 2ac5b7ae8f4c7641378ca01015c2fc0af8158641
     const direction = this.Direction;
     const newShop = {
       name,
@@ -216,6 +216,7 @@ export class ShopCreateComponent implements OnInit {
       serviceList,
       date
     };
+    console.log(newShop)
     this.shopService.createShop(newShop).subscribe(query => {
       this.shopData = query;
     });
@@ -225,14 +226,13 @@ export class ShopCreateComponent implements OnInit {
   }
   supplyValues(event){
     this.serviceList=[];
-    // this.priceMin=[];
     console.log(event)
     console.log(this.shopList)
     for (let i = 0; i < this.shopList.length; i++) {
       console.log(this.shopList[i].serviceType == event[0])
       if(this.shopList[i].serviceType == event[0]){
         for (let j = 0; j < this.shopList[i].serviceList.length; j++) {
-          this.serviceList.push({priceMin: 0, priceMax: 0})      
+          this.serviceList.push({priceMin: 0, priceMax: 0, name:""})      
         } break;}
     }
     console.log(this.serviceList)
