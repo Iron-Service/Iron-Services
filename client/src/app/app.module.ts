@@ -34,6 +34,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapsComponent } from './components/google-maps/google-maps.component';
 import { SearchGoogleMapsComponent } from './components/search-google-maps/search-google-maps.component';
 import { AngularGooglePlaceModule } from 'angular-google-place';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,7 @@ import { AngularGooglePlaceModule } from 'angular-google-place';
     }),
     AngularGooglePlaceModule
   ],
-  providers: [AuthService, SearchService, ShopService],
+  providers: [AuthService, SearchService, ShopService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

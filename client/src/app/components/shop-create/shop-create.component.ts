@@ -5,7 +5,8 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  AbstractControl
+  AbstractControl,
+  FormControl
 } from "@angular/forms";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
@@ -26,8 +27,14 @@ interface Day {
   styleUrls: ["./shop-create.component.scss"]
 })
 export class ShopCreateComponent implements OnInit {
+
+  shopFormControl = new FormControl ('', [
+    Validators.required,
+    Validators.minLength(3),
+  ]);
+
   shopData: any;
-  isLinear = false;
+  isLinear = true;
   isEditable: boolean = true;
   formGroup: FormGroup;
   shopList: Array<Object> = [];
