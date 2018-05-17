@@ -1,26 +1,26 @@
 const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
-const Shop = require("../models/Shop");
-const Comment = require("../models/Comment");
-const Appointment = require("../models/Appointment");
-const Message = require("../models/Message");
-const User = require("../models/User");
-const ShopList = require("../models/ShopList");
-const isUserShop = require("../middlewares/isUserShop");
-const ensureLogedIn = require("../middlewares/ensureLogedIn");
+const Shop = require("../../models/Shop");
+const Comment = require("../../models/Comment");
+const Appointment = require("../../models/Appointment");
+const Message = require("../../models/Message");
+const User = require("../../models/User");
+const ShopList = require("../../models/ShopList");
+const isUserShop = require("../../middlewares/isUserShop");
+const ensureLogedIn = require("../../middlewares/ensureLogedIn");
 
-router.post("/create", (req, res) => {
+router.post("/create", ensureLogedIn("Error"), (req, res) => {
   const { name, direction, description, serviceType, serviceList , date} = req.body;
 
   const shop = { name, direction, description, serviceType, serviceList, date };
-  Shop.findOne({ "direction.address": shop.direction.name }).then(shops => {
+  Shop.findOne({ "direction.address": shop.direction.address }).then(shops => {
     console.log(shop, shops);
     if (shops && shops.direction.address === shop.direction.address)
       return res
         .status(400)
         .json({
-          message: `There's already a shop at ${shop.direction.name} place.`
+          message: `There's already a shop at ${shop.direction.address} place.`
         });
     ShopList.findOne({ serviceType: shop.serviceType }).then(serviceType => {
       if (!serviceType)
@@ -40,12 +40,11 @@ router.post("/create", (req, res) => {
         
         if (cont.length >= 3) break;
       }
-      console.log(cont.length == 3);
       if (cont.length < 3 || cont.indexOf("err") != -1)
-        return res.status(400).json({ message: "ListService error" });
+        return res.status(404).json({ message: "ListService error" });
       Shop.create(shop, (err, arrayShop) => {
         if (err)
-          return res.status(400).json({ message: `Shop ${shop.name} error.` });
+          return res.status(402).json({ message: `Shop ${shop.name} error.` });
         req.user
           .update({ $push: { shopsList: arrayShop._id }, shop: true })
           .then(() =>
@@ -57,7 +56,7 @@ router.post("/create", (req, res) => {
 });
 
 //Show all shops of the owner
-router.get("/", ensureLogedIn("/shop"), (req, res) => {
+router.get("/", ensureLogedIn("Error"), (req, res) => {
   Shop.find({ _id: req.user.shopsList })
     .select({ name: 1, direction: 1, numVisits: 1 })
     .then(list => res.status(200).json(list))
@@ -65,14 +64,14 @@ router.get("/", ensureLogedIn("/shop"), (req, res) => {
 });
 
 //Enter into the shop
-router.get("/:id", isUserShop("/shop"), (req, res) => {
+router.get("/:id", isUserShop("Error"), (req, res) => {
   Shop.findById(req.params.id)
     .then(shop => res.status(200).json(shop))
     .catch(err => res.status(400).json(err));
 });
 
 //Update address
-router.put("/:id/update", isUserShop("/shop"), (req, res) => {
+router.put("/:id/update", isUserShop("Error"), (req, res) => {
   const { direction, description, horario, serviceList } = req.body;
   const shopUpdate = { direction, description, horario, serviceList };
   const p = _.pickBy(shopUpdate, _.identity);
@@ -82,7 +81,7 @@ router.put("/:id/update", isUserShop("/shop"), (req, res) => {
     .catch(err => res.status(400).json(err));
 });
 //Delete shop
-router.delete("/:id/delete", isUserShop("/shop"), (req, res) => {
+router.delete("/:id/delete", isUserShop("Error"), (req, res) => {
   Shop.findByIdAndRemove(req.params.id)
     .then(shop => {
       if (!shop)

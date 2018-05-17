@@ -28,7 +28,7 @@ export class AuthService {
 
   signUp(user) {
     return this.http
-      .post(`${this.BASE_URL}/auth/signup`, user, this.options)
+      .post(`${this.BASE_URL}/api/auth/signup`, user, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
       .catch(this.handleError);
@@ -36,7 +36,7 @@ export class AuthService {
 
   logIn(username, password) {
     return this.http
-      .post(`${this.BASE_URL}/auth/login`, {username, password}, this.options)
+      .post(`${this.BASE_URL}/api/auth/login`, {username, password}, this.options)
       .map(res => res.json())
       .map(user =>  this.handleUser(user))
       .catch(this.handleError);
@@ -44,7 +44,7 @@ export class AuthService {
 
   logOut() {
     return this.http
-      .get(`${this.BASE_URL}/auth/logout`, this.options)
+      .get(`${this.BASE_URL}/api/auth/logout`, this.options)
       .map(res => res.json())
       .map(() => this.handleUser())
       .catch(this.handleError);
@@ -52,7 +52,7 @@ export class AuthService {
 
   isLoggedIn() {
     return this.http
-      .get(`${this.BASE_URL}/auth/loggedin`, this.options)
+      .get(`${this.BASE_URL}/api/auth/loggedin`, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
       .catch(this.handleError);
