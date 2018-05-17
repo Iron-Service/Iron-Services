@@ -41,9 +41,9 @@ export class SearchComponent implements OnInit {
     let query = `${obj.type}?`
     for( let key in obj ){
       if(obj[key] != obj.type && obj[key] != undefined && obj[key] != true  && obj[key] != false)
-      query+=`${key}=${obj[key]},`
+      query+=`${key}=${obj[key]}&`
     }
-    query+= "&name="
+    query+= "name="
     for(let key in obj){
       if(obj[key] == true)
       query += `${key},`

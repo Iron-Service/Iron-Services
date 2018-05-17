@@ -116,6 +116,7 @@ const shop = [
     name: "Hairdresser1",
     description: "oandosadpasmd",
     direction:{
+      city:"Madrid",
       address: "a",
       lat:40.391746, 
       lng:-3.697098
@@ -136,7 +137,6 @@ const shop = [
     name: "Hairdresser2",
     description: "oandosadpasmd",
     direction: {
-      city:"Madrid",
       city:"Madrid",
       address: "b",
       lat:40.396372, 
@@ -161,8 +161,7 @@ const shop = [
   {
     name: "Hairdresser3",
     description: "oandosadpasmd",
-    direction: {
-      city:"Madrid",
+    direction: {      
       city:"Madrid",
       address: "c",
       lat:40.396372, 
@@ -247,6 +246,22 @@ const users = [
     password: hashPass,
     shop: false,
     admin: false,
+    evaluatedShops: []
+  },
+  {
+    username: "PepeUsuario",
+    email: "pepe@pepe.pepe",
+    password: hashPass,
+    shop: false,
+    admin: false,
+    evaluatedShops: []
+  },
+  {
+    username: "Pepe",
+    email: "pepe@pepe.pepe",
+    password: hashPass,
+    shop: false,
+    admin: true,
     evaluatedShops: []
   }
 ];

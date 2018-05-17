@@ -47,7 +47,6 @@ router.post("/shop/:id", (req, res) => {
 router.get("/:id/:num", (req, res) => {
   const num = req.params.num;
   const id = req.params.id;
-
   function updateComment(comment, num) {
     Comment.findByIdAndUpdate(
       comment._id,

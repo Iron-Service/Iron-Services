@@ -18,7 +18,8 @@ export class ShopProfileComponent implements OnInit {
     private _location: Location,
     private router: Router,
     private route: ActivatedRoute,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private shopService: ShopService
   ) {
     this.route.params.subscribe(params => {
       this.searchService.getShop(params.id).subscribe(e => (this.shop = e));
@@ -28,4 +29,14 @@ export class ShopProfileComponent implements OnInit {
     this._location.back();
   }
   ngOnInit() {}
+  votedComment(id, num){
+    console.log(id, num)
+    this.shopService.votedComment(id,num).subscribe(num => this.refresh());
+  }
+  refresh(){
+    this.route.params.subscribe(params => {
+      this.searchService.getShop(params.id).subscribe(e => (this.shop = e));
+    });
+  }
+
 }

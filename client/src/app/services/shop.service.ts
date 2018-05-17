@@ -36,8 +36,14 @@ export class ShopService {
       )
       .map(res => res.json());
   }
-  deleteShop() {
+  votedComment(id,num) {
+    return this.http.get(`${this.BASE_URL}/api/comment/${id}/${num}`, this.options)
+    .map(res => res.json());
+  }
+  deleteShop(id) {
     console.log("Shop was removed from database.")
     //jaleatorio de destruir tiendas
+    return this.http.get(`${this.BASE_URL}/api/delete/${id}`, this.options)
+    .map(res => res.json());
   }
 }

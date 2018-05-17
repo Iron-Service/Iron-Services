@@ -39,25 +39,25 @@ router.get("/city", (req, res) => {
 
 router.get("/:service", (req, res) => {
   let joker = {};
-
   let min = req.query.min;
   min = { priceMin: { $gte: min } };
   min.priceMin = _.pickBy(min.priceMin, _.identity);
   if (min.priceMin.$gte == undefined) min = _.pickBy(min.priceMin, _.identity);
-
+  
   let max = req.query.max;
   max = { priceMax: { $lte: max } };
   max.priceMax = _.pickBy(max.priceMax, _.identity);
   if (max.priceMax.$lte == undefined) max = _.pickBy(max.priceMax, _.identity);
-
-  if (req.query.name != undefined && req.query.name != "")
-    joker = {
-      "serviceList.name": {
-        $all: decodeURIComponent(req.query.name).split(",")
-      }
-    };
-  const city = req.query.city;
   
+  if (req.query.name != undefined && req.query.name != "")
+  joker = {
+    "serviceList.name": {
+      $all: decodeURIComponent(req.query.name).split(",")
+    }
+  };
+  console.log(req.query.city);
+  const city = req.query.city;
+  console.log(req.params.service, min, max, joker, city);
   Shop.find({
     $and: [
       { serviceType: req.params.service },
@@ -68,7 +68,7 @@ router.get("/:service", (req, res) => {
     ]
   })
     .select({ name: 1, direction: 1, description: 1, serviceList: 1 })
-    .then(shop => res.status(200).json(shop))
+    .then(shop => {console.log(shop);res.status(200).json(shop);})
     .catch(err => json.status(500).json({ message: err }));
 });
 
