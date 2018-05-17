@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   type: string;
 
   cities: Array<Object> = [];
-
+  city:Array<Object>;
   shopList: Array<Object> = [];
   
   constructor(

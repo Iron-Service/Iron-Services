@@ -56,14 +56,15 @@ router.get("/:service", (req, res) => {
         $all: decodeURIComponent(req.query.name).split(",")
       }
     };
+  const city = req.query.city;
   
-
   Shop.find({
     $and: [
       { serviceType: req.params.service },
       joker,
       { serviceList: { $elemMatch: min } },
-      { serviceList: { $elemMatch: max } }
+      { serviceList: { $elemMatch: max } },
+      { "direction.city" : city }
     ]
   })
     .select({ name: 1, direction: 1, description: 1, serviceList: 1 })

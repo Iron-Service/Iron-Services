@@ -136,6 +136,8 @@ const shop = [
     name: "Hairdresser2",
     description: "oandosadpasmd",
     direction: {
+      city:"Madrid",
+      city:"Madrid",
       address: "b",
       lat:40.396372, 
       lng:-3.700283
@@ -160,6 +162,8 @@ const shop = [
     name: "Hairdresser3",
     description: "oandosadpasmd",
     direction: {
+      city:"Madrid",
+      city:"Madrid",
       address: "c",
       lat:40.396372, 
       lng:-3.700283
@@ -184,6 +188,7 @@ const shop = [
     name: "Mechanic1",
     description: "oandosadpasmd",
     direction: {
+      city:"Madrid",
       address: "d",
       lat:40.391746, 
       lng:-3.697098
@@ -204,6 +209,7 @@ const shop = [
     name: "Mechanic2",
     description: "oandosadpasmd",
     direction: {
+      city:"Madrid",
       address: "e",
       lat:40.396372, 
       lng:-3.700283
@@ -220,6 +226,7 @@ const shop = [
     name: "Mechanic3",
     description: "oandosadpasmd",
     direction: {
+      city:"Madrid",
       address: "f",
       lat:40.396372, 
       lng:-3.700283

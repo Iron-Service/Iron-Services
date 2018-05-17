@@ -2,7 +2,7 @@
   <form (ngSubmit)="getListEvent(queryForm)" #queryForm="ngForm">
   <mat-form-field class="col-md-3">
     <mat-select placeholder="City" [(ngModel)]=city name="city" >
-      <mat-option *ngFor="let list of cities" value={{list.name}}>{{list.name}}</mat-option>
+      <mat-option *ngFor="let list of cities" value={{list}}>{{list.name}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field class="col-md-3" *ngIf="city">

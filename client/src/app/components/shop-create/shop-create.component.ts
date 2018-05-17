@@ -162,8 +162,8 @@ export class ShopCreateComponent implements OnInit {
       )
         serviceList.push({name:key, priceMin:10})
     }
-    console.log(serviceList)
     const date = this.date
+    console.log(date)
     const direction = this.Direction;
     const newShop = {name, direction, description, serviceType, serviceList, date};
     this.shopService.createShop(newShop).subscribe(query => {

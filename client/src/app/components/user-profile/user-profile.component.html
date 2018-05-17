@@ -8,6 +8,9 @@
     </div>
   </div>
   <div *ngIf="authService.user&&authService.user.shop">
-    <button routerLink="shops/create">Create Shop</button>
+      <mat-card *ngFor="let shop of shopsList" class="col-md-12 offset-md-1">
+        <app-userShops [shopItem]="shop"></app-userShops>          
+      </mat-card>
+    <button class="offset-md-5" routerLink="shops/create">Create Shop</button>
   </div>
 </mat-card>

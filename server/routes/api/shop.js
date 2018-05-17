@@ -6,22 +6,28 @@ const Comment = require("../../models/Comment");
 const Appointment = require("../../models/Appointment");
 const Message = require("../../models/Message");
 const User = require("../../models/User");
+const City = require("../../models/City");
 const ShopList = require("../../models/ShopList");
 const isUserShop = require("../../middlewares/isUserShop");
 const ensureLogedIn = require("../../middlewares/ensureLogedIn");
 
 router.post("/create", ensureLogedIn("Error"), (req, res) => {
-  const { name, direction, description, serviceType, serviceList , date} = req.body;
+  const {
+    name,
+    direction,
+    description,
+    serviceType,
+    serviceList,
+    date
+  } = req.body;
 
   const shop = { name, direction, description, serviceType, serviceList, date };
   Shop.findOne({ "direction.address": shop.direction.address }).then(shops => {
     console.log(shop, shops);
     if (shops && shops.direction.address === shop.direction.address)
-      return res
-        .status(400)
-        .json({
-          message: `There's already a shop at ${shop.direction.address} place.`
-        });
+      return res.status(400).json({
+        message: `There's already a shop at ${shop.direction.address} place.`
+      });
     ShopList.findOne({ serviceType: shop.serviceType }).then(serviceType => {
       if (!serviceType)
         return res.status(400).json({ message: "Error, serviceType no found" });
@@ -37,7 +43,7 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
             break;
           }
         }
-        
+
         if (cont.length >= 3) break;
       }
       if (cont.length < 3 || cont.indexOf("err") != -1)
@@ -48,7 +54,14 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
         req.user
           .update({ $push: { shopsList: arrayShop._id }, shop: true })
           .then(() =>
-            res.status(200).json({ message: `Shop ${shop.name} created.` })
+            City.findOne({ name: arrayShop.direction.city }).then(city => {
+              if (!city)
+                City.create({ name: arrayShop.direction.city }, err =>
+                  res
+                    .status(200)
+                    .json({ message: `Shop ${shop.name} created.` })
+                );
+            })
           );
       });
     });

@@ -1,3 +1,8 @@
-<p>
-  userShops works!
-</p>
+<mat-card class="shop" >
+  <div class="col-10">
+    <mat-card-title>{{shopItem.name}}</mat-card-title>
+    <mat-card-subtitle>{{shopItem.direction.address}}</mat-card-subtitle>
+  </div>
+  <mat-card-content class="col-6">Num Visits: {{shopItem.numVisits}}</mat-card-content>
+</mat-card>
+

@@ -9,9 +9,12 @@ import { ShopService } from '../../services/shop.service';
 })
 export class UserProfileComponent implements OnInit {
 
+  shopsList:Array<Object>;
+
   constructor(private authService:AuthService, private shopService:ShopService ) { }
 
   ngOnInit() {
+    this.shopService.getList().subscribe(shopsList => {this.shopsList = shopsList; console.log(shopsList)})
   }
   createShop(shop){
     this.shopService.createShop(shop).subscribe()

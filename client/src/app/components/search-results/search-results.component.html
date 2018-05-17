@@ -1,7 +1,7 @@
 <mat-card class="shop" [routerLink]="['/shop', shopItem._id]">
   <div class="col-6">
     <mat-card-title>{{shopItem.name}}</mat-card-title>
-    <mat-card-subtitle>{{shopItem.direction.name}}</mat-card-subtitle>
+    <mat-card-subtitle>{{shopItem.direction.address}}</mat-card-subtitle>
     <mat-chip-list>
       <mat-chip *ngFor="let service of shopItem.serviceList">{{service.name}}</mat-chip>
     </mat-chip-list>
