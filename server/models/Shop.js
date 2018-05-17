@@ -12,12 +12,12 @@ const shopSchema = new Schema({
   },
   date: [{
     name: String,
-    amOp: Date,
-    amCl: Date,
-    pm: {type:Boolean, default:false},
-    pmOp: Date,
-    pmCl: Date,
-    open: {type:Boolean, default:false}
+    amOp: {hour: String, minute:String},
+    amCl: {hour: String, minute:String},    
+    pmOp: {hour: String, minute:String},
+    pmCl: {hour: String, minute:String},
+    open: {type:Boolean, default:false},
+    evening: Boolean
   }],
   serviceType:{
     type:String, 

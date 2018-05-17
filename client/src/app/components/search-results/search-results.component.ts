@@ -32,6 +32,7 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.shopItem)
   }
 
 

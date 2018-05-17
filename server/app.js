@@ -87,33 +87,9 @@ app.locals.title = "Iron-Service";
 app.use(flash());
 
 
+require("./routes/routes")(app);
 
-const authRoutes = require("./routes/auth");
-app.use("/auth", authRoutes);
 
-const shopRoutes = require("./routes/shop");
-app.use("/shop", shopRoutes);
-
-const messageRoutes = require("./routes/message");
-app.use("/message", messageRoutes);
-
-const commentRoutes = require("./routes/comment");
-app.use("/comment", commentRoutes);
-
-const appointmentRoutes = require("./routes/appointment");
-app.use("/appointment", appointmentRoutes);
-
-const complaintRoutes = require("./routes/complaint");
-app.use("/complaint", complaintRoutes);
-
-const directionRoutes = require("./routes/direction");
-app.use("/direction", directionRoutes);
-
-const adminRoutes = require("./routes/admin");
-app.use("/admin", adminRoutes);
-
-const index = require("./routes/index");
-app.use("/", index);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

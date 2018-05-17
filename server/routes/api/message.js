@@ -1,8 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-const Message = require("../models/Message");
-const User = require("../models/User");
-const Shop = require("../models/Shop");
+const Message = require("../../models/Message");
+const User = require("../../models/User");
+const Shop = require("../../models/Shop");
 
 
 

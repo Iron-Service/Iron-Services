@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Shop = require("../models/Shop");
-const ShopList = require("../models/ShopList");
-const City = require("../models/City");
+const Shop = require("../../models/Shop");
+const ShopList = require("../../models/ShopList");
+const City = require("../../models/City");
 const _ = require("lodash");
-const ensureLogedIn = require("../middlewares/ensureLogedIn");
+const ensureLogedIn = require("../../middlewares/ensureLogedIn");
 /* GET home page */
 
-const s = {};
 
 router.get("/", (req, res, next) => {
   Shop.find()
@@ -73,8 +72,8 @@ router.get("/:service", (req, res) => {
 });
 
 router.get("/search/:id", (req, res) => {
-  Shop.findOneAndUpdate(
-    req.params.id,
+  Shop.findOneAndUpdate({_id:
+    req.params.id},
     { $inc: { numVisits: +1 } },
     { new: true }
   )

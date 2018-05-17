@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const Shop = require("../models/Shop");
-const User = require("../models/User");
-const Comment = require("../models/Comment");
+const Shop = require("../../models/Shop");
+const User = require("../../models/User");
+const Comment = require("../../models/Comment");
 const _ = require("lodash");
 
 //  Showing comments on shop's page

@@ -65,7 +65,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     HttpModule,
     RouterModule.forRoot(routes),
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDOuYtitp5sloRqK-gEtMnF0Myng6DM4o0",
+      apiKey: "AIzaSyB0q7m3RaOV6FdeoPaBm9u52YQN-JT6ChU",
       libraries: ["places"]
     }),
     AngularGooglePlaceModule

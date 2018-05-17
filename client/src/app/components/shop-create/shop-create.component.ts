@@ -38,74 +38,74 @@ export class ShopCreateComponent implements OnInit {
   isEditable: boolean = true;
   formGroup: FormGroup;
   shopList: Array<Object> = [];
-  type: string;
+  serviceType: string;
   name: string;
   description: string;
   list: any;
  
-  days: any = [
+  date: any = [
     {
       name: "Monday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Tuesday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Wednesday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Thursday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Friday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Saturday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     },
     {
       name: "Sunday",
       open: false,
       evening: false,
-      amOp: { hour: "00", minute: "00" },
-      amCl: { hour: "00", minute: "00" },
-      pmOp: { hour: "00", minute: "00" },
-      pmCl: { hour: "00", minute: "00" }
+      amOp: { hour: "08", minute: "00" },
+      amCl: { hour: "13", minute: "00" },
+      pmOp: { hour: "17", minute: "00" },
+      pmCl: { hour: "21", minute: "00" }
     }
   ];
   hours: Array<String> = [
@@ -159,30 +159,25 @@ export class ShopCreateComponent implements OnInit {
   }
   submit(shopForm) {
     const obj = shopForm.form.value;
-    console.log(obj);
-    console.log(this.days)
-    let query = `${obj.type}?`;
+    console.log(obj)
+    const {name, description, serviceType} = shopForm.form.value;
+    let serviceList = []
     for (let key in obj) {
-      if (
-        obj[key] != obj.type &&
-        obj[key] != undefined &&
-        obj[key] != true &&
-        obj[key] != false
+      if (        
+        obj[key] == true &&
+        key.indexOf("date") === -1
       )
-        query += `${key}=${obj[key]},`;
+        serviceList.push({name:key, priceMin:10})
     }
-    query += "&name=";
-    for (let key in obj) {
-      if (obj[key] == true) query += `${key},`;
-    }
-    query = query.substr(0, query.length - 1);
-    console.log("EEEEEEEEEE", shopForm);
-    this.shopService.createShop(shopForm.form.value).subscribe(query => {
+    console.log(serviceList)
+    const date = this.date
+    const direction = this.Direction;
+    const newShop = {name, direction, description, serviceType, serviceList, date};
+    this.shopService.createShop(newShop).subscribe(query => {
       this.shopData = query;
     });
   }
   direction(event) {
-    console.log(event);
     this.Direction = event;
   }
 }

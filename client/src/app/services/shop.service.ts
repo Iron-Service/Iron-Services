@@ -10,19 +10,19 @@ export class ShopService {
   constructor(private http: Http) {}
 
   getList() {
-    return this.http.get(`${this.BASE_URL}/shop`, this.options)
+    return this.http.get(`${this.BASE_URL}/api/shop`, this.options)
     .map(res => res.json());
   }
 
   createShop(shop) {
     return this.http
-      .post(`${this.BASE_URL}/shop/create`, shop , this.options)
+      .post(`${this.BASE_URL}/api/shop/create`, shop , this.options)
       .map(res => res.json());
   }
 
   getShop(id) {
     return this.http
-      .get(`${this.BASE_URL}/shop/${id}`)
+      .get(`${this.BASE_URL}/api/shop/${id}`)
       .map(res => res.json());
   }
 
@@ -30,7 +30,7 @@ export class ShopService {
     console.log("Updated shop properties: " + content);
     return this.http
       .post(
-        `${this.BASE_URL}/shop/${id}/update`,
+        `${this.BASE_URL}/api/shop/${id}/update`,
         { content },
         this.options
       )
