@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   type: string;
 
   cities: Array<Object> = [];
-
+  cityIndex: any;
   shopList: Array<Object> = [];
   
   constructor(
@@ -53,5 +53,9 @@ export class SearchComponent implements OnInit {
     this.searchService.getListEvent(query).subscribe( query => this.shopsData = query
     );
   }
-  
+  passIndex(i){
+    console.log(i)
+    this.cityIndex = i;
+    console.log(this.cityIndex)
+  }
 }
