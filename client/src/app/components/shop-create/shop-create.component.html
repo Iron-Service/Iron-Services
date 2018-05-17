@@ -15,9 +15,10 @@
    </mat-error>
         </mat-form-field>
         <mat-form-field class="col-md-4">
-          <mat-select placeholder="Service Type" name="serviceType" [(ngModel)]="serviceType" (ngModelChange)="supplyValues($event)">
+          <mat-select placeholder="Service Type" name="serviceType" [(ngModel)]="serviceType" (ngModelChange)="supplyValues($event)" required>
             <mat-option *ngFor="let list of shopList" [value]="[list.serviceType]">{{list.serviceType}}</mat-option>
           </mat-select>
+          <mat-hint>Select the type of service</mat-hint>
         </mat-form-field>
         <p>Address</p>
           <app-search-google-maps (Dir)=direction($event)>
@@ -30,7 +31,7 @@
           
         </div>
         <div class="d-flex justify-content-end">
-          <button mat-button matStepperNext type="button">Next</button>
+          <button mat-button matStepperNext type="button" [disabled]="shopForm.invalid">Next</button>
         </div>
       </mat-step>
       <mat-step label="Services">
