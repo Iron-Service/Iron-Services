@@ -18,7 +18,7 @@ import {
   MatSliderModule,
   MatStepperModule,
   MatInputModule
-
+  
 } from "@angular/material";
 
 @NgModule({

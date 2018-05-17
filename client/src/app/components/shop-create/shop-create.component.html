@@ -5,10 +5,17 @@
     <mat-horizontal-stepper [linear]="true" #stepper>
       <mat-step label="Basics">
         <mat-form-field class="col-md-4">
-          <input matInput placeholder="Shop Name" name="name" [(ngModel)]="name">
+          <input matInput placeholder="Shop Name" required minlength="3" name="name" [(ngModel)]="name" [errorStateMatcher]="matcher">
+   <mat-hint>Shop name has to have at least 3 characters</mat-hint>
+   <mat-error *ngIf="shopFormControl.hasError('required') && !shopFormControl.hasError('minlength')">
+     Name is required
+   </mat-error>
+   <mat-error *ngIf="shopFormControl.hasError('minlength') && !shopFormControl.hasError('required')">
+     Minimum 3 characters required
+   </mat-error>
         </mat-form-field>
         <mat-form-field class="col-md-4">
-          <mat-select placeholder="Service Type" name="serviceType" [(ngModel)]="serviceType">
+          <mat-select placeholder="Service Type" name="serviceType" [(ngModel)]="serviceType" (ngModelChange)="supplyValues($event)">
             <mat-option *ngFor="let list of shopList" [value]="[list.serviceType]">{{list.serviceType}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -22,28 +29,35 @@
           <app-map [direction]="Direction"></app-map>
           
         </div>
-        <div>
+        <div class="d-flex justify-content-end">
           <button mat-button matStepperNext type="button">Next</button>
         </div>
       </mat-step>
       <mat-step label="Services">
         <div class="justify-content-start" *ngFor="let group of shopList; let j = index">
-          <div class="row" *ngIf="serviceType == shopList[j].serviceType">
-            <mat-checkbox class="col-sm-6 col-md-4 col-lg-3" *ngFor="let list of shopList[j].serviceList" [(ngModel)]="list.selected"
-              name={{list.name}}>
-              {{list.name}}</mat-checkbox>
+          <div *ngIf="serviceType == shopList[j].serviceType">
+            <div *ngFor="let list of shopList[j].serviceList; let k = index" class="wrapper">
+              <mat-checkbox  [(ngModel)]="list.selected"
+                name={{list.name}}>
+                {{list.name}}</mat-checkbox>
+                <div *ngIf="list.selected" class="row justify-content-start">
+                  <label>Min Price: <input matInput type="number" name="serviceList[{{k}}].priceMin" [(ngModel)]="serviceList[k].priceMin" required [value]="serviceList[k]?.priceMin"></label>
+                  <label *ngIf="serviceList[k].priceRange">Max Price: <input matInput type="number" name="serviceList[{{k}}].priceMax" [(ngModel)]="serviceList[k].priceMax" required [value]="serviceList[k]?.priceMax"></label>
+                  <mat-checkbox name="serviceList[{{k}}].priceRange" [(ngModel)]="serviceList[k].priceRange" [value]="serviceList[k].priceRange"> Price ranged</mat-checkbox>
+                </div>
+            </div>
           </div>
         </div>
         <div class="d-flex justify-content-between">
           <button mat-button matStepperPrevious type="button">Back</button>
-          <button mat-button matStepperNext type="button">Next</button>
+          <button mat-button matStepperNext type="button" >Next</button>
         </div>
       </mat-step>
       <mat-step label="Opening Hours">
         <div *ngFor="let day of date;let i = index" class="d-flex justify-content-start">
-          <mat-checkbox class="col-md-4 col-lg-2" name="date[{{i}}].open" [value]="day.open" [(ngModel)]="date[i].open">{{date[i].name}}</mat-checkbox>
-          <div *ngIf="day.open" class="d-flex justify-content-start">
-            <div>
+          <mat-checkbox class="col-md-4 col-lg-2" name="date[{{i}}].open" [value]="date[i].open" [(ngModel)]="date[i].open">{{date[i].name}}</mat-checkbox>
+          <div *ngIf="date[i].open" class="d-flex justify-content-start">
+            <div class="wrapper">
               <label>From: 
                 <div class="d-flex time">
                   <mat-select [(ngModel)]="date[i].amOp.hour" name="date[{{i}}].amOp.hour">
@@ -65,7 +79,7 @@
                 </div>
               </label>
             </div>
-            <div  *ngIf="day.evening">
+            <div class="wrapper" *ngIf="date[i].evening">
               <label>From:
                   <div class="d-flex time">
                       <mat-select [(ngModel)]="date[i].pmOp.hour" name="date[{{i}}].pmOp.hour">
@@ -87,19 +101,19 @@
                   </div>
               </label>
             </div>
-            <mat-checkbox name="day.evening" [value]="day.evening.value" [(ngModel)]="day.evening">Split service </mat-checkbox>
+            <mat-checkbox name="date[{{i}}].evening" [value]="date[i].evening.value" [(ngModel)]="date[i].evening">Split service </mat-checkbox>
           </div>
         </div>
 
         <div class="d-flex justify-content-between">
           <button mat-button matStepperPrevious type="button">Back</button>
-          <button mat-button matStepperNext type="button">Next</button>
+          <button mat-button matStepperNext type="button" [disabled]="shopForm.invalid">Next</button>
         </div>
       </mat-step>
       <mat-step label="Confirm">
           <div class="d-flex justify-content-between">
             <button mat-button matStepperPrevious type="button">Back</button>
-            <button mat-button type="submit">Submit</button>
+            <button mat-button type="submit" [disabled]="shopForm.invalid">Submit</button>
           </div>
         </mat-step>
     </mat-horizontal-stepper>
