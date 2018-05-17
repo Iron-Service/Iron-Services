@@ -10,7 +10,6 @@ import {
 } from "@angular/forms";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
-import { Direction } from "../search-google-maps/search-google-maps.component";
 
 interface Date {
   name: String;
@@ -30,17 +29,7 @@ interface ServiceList {
 interface ServiceType {
   name: String;
 }
-interface Service {
-  name: String;
-  description: String;
-  direction: Direction;
-  date: Date;
-  serviceType: ServiceType;
-  serviceList: ServiceList;
-  positive?: Number;
-  negative?: Number;
-  numVisits?: Number;
-}
+
 interface ShopList {
   created_at: String;
   serviceList: Array<Object>;
@@ -200,13 +189,8 @@ export class ShopCreateComponent implements OnInit {
       if (obj[key] == true && key.indexOf("date") === -1)
         serviceList.push({ name: key, priceMin: 10 });
     }
-<<<<<<< HEAD
     const date = this.date
     console.log(date)
-=======
-    console.log(serviceList);
-    const date = this.date;
->>>>>>> 2ac5b7ae8f4c7641378ca01015c2fc0af8158641
     const direction = this.Direction;
     const newShop = {
       name,
