@@ -40,13 +40,13 @@
               <mat-checkbox [(ngModel)]="list.selected" name={{list.name}} class="col-md-3 col-sm-12">
                 <label>{{list.name}}</label></mat-checkbox>
               <div *ngIf="list.selected" class="wrapper col-sm-12 col-md-6 d-flex">
-                <label class="price">Min:
+                <label class="col-4">Min:
                   <input matInput type="number" name="serviceList[{{k}}].priceMin" [(ngModel)]="serviceList[k].priceMin"
-                    required [value]="serviceList[k]?.priceMin" min="0" max="9999">
+                    required [value]="serviceList[k]?.priceMin" min="0" max="200">
                 </label>
-                <label class="price" *ngIf="serviceList[k].priceRange">Max:
+                <label class="col-4" *ngIf="serviceList[k].priceRange">Max:
                   <input matInput type="number" name="serviceList[{{k}}].priceMax" [(ngModel)]="serviceList[k].priceMax"
-                    required [value]="serviceList[k]?.priceMax" min="0" max="9999">
+                    required [value]="serviceList[k]?.priceMax" min="0" max="200">
                 </label>
                 <mat-checkbox name="serviceList[{{k}}].priceRange" [(ngModel)]="serviceList[k].priceRange" [value]="serviceList[k].priceRange">
                 Range</mat-checkbox>
@@ -61,8 +61,11 @@
       </mat-step>
       <mat-step label="Opening Hours">
         <div *ngFor="let day of date;let i = index" class="d-flex flex-wrap justify-content-start">
-          <mat-checkbox class="col-md-4 col-lg-2" name="date[{{i}}].open" [value]="date[i].open" [(ngModel)]="date[i].open">{{date[i].name}}</mat-checkbox>
-          <div *ngIf="date[i].open" class="d-flex justify-content-start">
+          <div class="d-flex">
+            <mat-checkbox name="date[{{i}}].open" [value]="date[i].open" [(ngModel)]="date[i].open">{{date[i].name}}</mat-checkbox>
+            <mat-checkbox *ngIf="date[i].open" name="date[{{i}}].evening" [value]="date[i].evening.value" [(ngModel)]="date[i].evening">Split service </mat-checkbox>
+          </div>
+          <div *ngIf="date[i].open" class="d-flex justify-content-start">    
             <div class="wrapper">
               <label>From:
                 <div class="d-flex time">
@@ -107,7 +110,7 @@
                 </div>
               </label>
             </div>
-            <mat-checkbox name="date[{{i}}].evening" [value]="date[i].evening.value" [(ngModel)]="date[i].evening">Split service </mat-checkbox>
+            
           </div>
         </div>
 

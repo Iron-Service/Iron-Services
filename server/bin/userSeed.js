@@ -161,7 +161,7 @@ const shop = [
   {
     name: "Hairdresser3",
     description: "oandosadpasmd",
-    direction: {      
+    direction: {
       city:"Madrid",
       address: "c",
       lat:40.396372, 

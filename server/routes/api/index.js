@@ -55,9 +55,7 @@ router.get("/:service", (req, res) => {
       $all: decodeURIComponent(req.query.name).split(",")
     }
   };
-  console.log(req.query.city);
   const city = req.query.city;
-  console.log(req.params.service, min, max, joker, city);
   Shop.find({
     $and: [
       { serviceType: req.params.service },

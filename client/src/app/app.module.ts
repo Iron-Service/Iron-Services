@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation'
 
 //  Services Imports
 import { AuthService } from './services/auth.service';
@@ -61,6 +62,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     AppMaterialModule,
     BrowserAnimationsModule,
     FormsModule,
+    CustomFormsModule,
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
