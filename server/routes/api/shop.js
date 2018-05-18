@@ -39,12 +39,12 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
         for (let j = 0, len2 = serviceList.length; j < len2; j++) {
           if (newShop[i].name === serviceList[j].name) {
             if (cont.indexOf(newShop[i]) != -1) cont.push("err");
+            if(newShop[i].priceMax == 0) newShop[i].priceMax = newShop[i].priceMin;
             cont.push(newShop[i].name);
             break;
           }
         }
 
-        if (cont.length >= 3) break;
       }
       if (cont.length < 3 || cont.indexOf("err") != -1)
         return res.status(404).json({ message: "ListService error" });
