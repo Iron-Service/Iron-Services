@@ -125,12 +125,13 @@ const shop = [
     serviceList: [
       {
         name: "Wet Cut",
-        priceMin: 1
+        priceMin: 1,
+        priceMax:2
       },
       {
         name: "Dry Cut",
-        priceMin: 2
-      }
+        priceMin: 2,
+        priceMax:3     }
     ]
   },
   {
@@ -146,16 +147,18 @@ const shop = [
     serviceList: [
       {
         name: "Dry Cut",
-        priceMin: 10
-      },
+        priceMin: 10,
+        priceMax:20      },
       {
         name: "Wet Cut",
         priceMin: 3
-      },
+ ,
+        priceMax:10     },
       {
         name: "Gents' Highlights",
         priceMin: 50
-      }
+,
+        priceMax:200      }
     ]
   },
   {
@@ -172,15 +175,18 @@ const shop = [
       {
         name: "Bridal Hair and Trial",
         priceMin: 25
-      },
+,
+        priceMax:30      },
       {
         name: "Fuencarral-El Pardo",
         priceMin: 10
-      },
+,
+        priceMax:20      },
       {
         name: "Wet Cut",
         priceMin: 1
-      }
+ ,
+        priceMax:2     }
     ]
   },
   {
@@ -196,11 +202,13 @@ const shop = [
     serviceList: [
       {
         name: "Car Electrical",
-        priceMin: 150
+        priceMin: 150,
+        priceMax:200
       },
       {
         name: "Fuel Injection",
-        priceMin: 1130
+        priceMin: 113,
+        priceMax:2000
       }
     ]
   },
@@ -217,7 +225,8 @@ const shop = [
     serviceList: [
       {
         name: "Car Electrical",
-        priceMin: 160
+        priceMin: 160,
+        priceMax:280
       }
     ]
   },
@@ -234,7 +243,8 @@ const shop = [
     serviceList: [      
       {
         name: "Fuel Injection",
-        priceMin: 120
+        priceMin: 120,
+        priceMax:2000
       }
     ]
   },

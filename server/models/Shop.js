@@ -32,7 +32,8 @@ const shopSchema = new Schema({
   evaluees: [{type:Schema.Types.ObjectId, ref: "User"}],
   positive: Number,
   negative: Number,
-  numVisits: {type:Number, default:0}
+  numVisits: {type:Number, default:0},
+  messages:[{type:Schema.Types.ObjectId, ref:"Message"}]
 }, {
   timestamps: {
     createdAt: 'created_at',

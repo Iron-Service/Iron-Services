@@ -9,6 +9,7 @@ const Shop = require("../../models/Shop");
 
 router.get('/', (req, res, next) => {
   Message.find({_user:req.user.id})
+  .populate("_shop", "name direction")
   .then(message => {
     return res.status(200).json(message);
   })
