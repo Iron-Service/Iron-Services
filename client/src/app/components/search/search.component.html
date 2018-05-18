@@ -11,12 +11,12 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-md-3" *ngIf="city">
-      <mat-select placeholder="Service Type" [(ngModel)]="type" name="type">
+      <mat-select placeholder="Service Type" [(ngModel)]="type" name="type" required>
         <mat-option *ngFor="let list of shopList" value={{list.serviceType}}>{{list.serviceType}}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-accordion *ngIf="city">
+    <mat-accordion *ngIf="type">
       <mat-expansion-panel [style.backgroundColor]="'#e6e6ff'">
         <mat-expansion-panel-header>
           <mat-panel-title>

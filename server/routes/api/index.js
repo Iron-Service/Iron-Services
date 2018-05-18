@@ -36,15 +36,14 @@ router.get("/city", (req, res) => {
     .then(city => res.status(200).json(city))
     .catch(err => res.status(500).json({ message: err }));
 });
-
 router.get("/:service", (req, res) => {
   let joker = {};
-  let min = req.query.min;
+  let min = req.query.priceMin;
   min = { priceMin: { $gte: min } };
   min.priceMin = _.pickBy(min.priceMin, _.identity);
   if (min.priceMin.$gte == undefined) min = _.pickBy(min.priceMin, _.identity);
   
-  let max = req.query.max;
+  let max = req.query.priceMax;
   max = { priceMax: { $lte: max } };
   max.priceMax = _.pickBy(max.priceMax, _.identity);
   if (max.priceMax.$lte == undefined) max = _.pickBy(max.priceMax, _.identity);
