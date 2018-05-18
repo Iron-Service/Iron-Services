@@ -1,3 +1,14 @@
-<p>
-  userMessages works!
-</p>
+<mat-card class="main col-lg-8 offset-lg-2">
+  <mat-card *ngIf="authService.user&&authService.user.messages.length===0">
+  <h2>
+    <strong>You don't have any messages.</strong>
+  </h2>
+  </mat-card>
+  <mat-card *ngFor="let message of messageList">
+    <h4><strong>Title:</strong> {{message.title}}</h4> 
+    <p><strong>From:</strong> {{message._shop.name}}</p> 
+    <p><span class="small"><>{{message._shop.direction}}</span></p>
+    <p><span class="small">{{message.created_at}}</span></p>
+    <p>{{message.content}}</p>
+  </mat-card>
+</mat-card>

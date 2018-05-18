@@ -42,11 +42,11 @@
               <div *ngIf="list.selected" class="wrapper col-sm-12 col-md-6 d-flex">
                 <label class="col-4">Min:
                   <input matInput type="number" name="serviceList[{{k}}].priceMin" [(ngModel)]="serviceList[k].priceMin"
-                    required [value]="serviceList[k]?.priceMin" min="0" max="200">
+                    [value]="serviceList[k]?.priceMin" min="0" max="200">
                 </label>
                 <label class="col-4" *ngIf="serviceList[k].priceRange">Max:
                   <input matInput type="number" name="serviceList[{{k}}].priceMax" [(ngModel)]="serviceList[k].priceMax"
-                    required [value]="serviceList[k]?.priceMax" min="0" max="200">
+                    [value]="serviceList[k]?.priceMax" min="0" max="200">
                 </label>
                 <mat-checkbox name="serviceList[{{k}}].priceRange" [(ngModel)]="serviceList[k].priceRange" [value]="serviceList[k].priceRange">
                 Range</mat-checkbox>

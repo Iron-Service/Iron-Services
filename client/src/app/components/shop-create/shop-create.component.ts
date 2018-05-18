@@ -10,6 +10,7 @@ import {
 } from "@angular/forms";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
+import { Route, Router } from "@angular/router";
 
 interface Date {
   name: String;
@@ -166,9 +167,9 @@ export class ShopCreateComponent implements OnInit {
   constructor(
     private _location: Location,
     private authService: AuthService,
-    private fb: FormBuilder,
     private searchService: SearchService,
-    private shopService: ShopService
+    private shopService: ShopService,
+    private router: Router
   ) {
     this.searchService.getShopTypes().subscribe(list => {
       this.shopList = list;
@@ -189,6 +190,7 @@ export class ShopCreateComponent implements OnInit {
     }
     let cont = 0;
     let serviceList = [];
+    
     for (let key in obj) {
       if (obj[key] == true && key.indexOf("date") === -1){    
         newserviceList[cont].name = key;
@@ -210,6 +212,8 @@ export class ShopCreateComponent implements OnInit {
     console.log(newShop)
     this.shopService.createShop(newShop).subscribe(query => {
       this.shopData = query;
+      this.router.navigate(['/profile']);
+
     });
   }
   direction(event) {

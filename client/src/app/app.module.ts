@@ -9,6 +9,7 @@ import { CustomFormsModule } from 'ng2-validation'
 import { AuthService } from './services/auth.service';
 import { ShopService } from './services/shop.service';
 import { SearchService } from './services/search.service';
+import { MessageService } from './services/message.service';
 //  Router imports
 import { routes } from './routers/my-route.routing';
 //  Pipe imports
@@ -72,7 +73,7 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
     }),
     AngularGooglePlaceModule
   ],
-  providers: [AuthService, SearchService, ShopService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher  }],
+  providers: [AuthService, SearchService, MessageService, ShopService, {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

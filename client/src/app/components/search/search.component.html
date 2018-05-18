@@ -25,7 +25,7 @@
         </mat-expansion-panel-header>
         <div class="justify-content-start">
           <mat-form-field class="col-md-3">
-            <input type="number" placeholder="Min" matInput min="0" max="200" name="priceMin" [(ngModel)]="priceMin" [lte]="priceMax">
+            <input type="number" placeholder="Min" matInput min="0" max="2000" name="priceMin" [(ngModel)]="priceMin" [lte]="priceMax">
             <mat-error *ngIf="priceMin.errors?.lte&&priceMin!=null">Value needs to be lower than Max</mat-error>
             <mat-hint>Value: 1-200</mat-hint>
           </mat-form-field>
@@ -52,7 +52,7 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-    <button type="submit" class="align-self-end col-md-2">Search</button>
+    <button type="submit" class="align-self-end col-md-2" [disabled]="queryForm.invalid">Search</button>
   </form>
 </mat-card>
 <mat-card *ngFor="let shop of shopsData" class="col-md-8 offset-md-2">

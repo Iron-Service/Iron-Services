@@ -67,5 +67,13 @@ span.small {
 .navbar-nav{
     justify-content: center;
 }
-
+.shop {
+    background: #e6e6ff;
+    &:hover {
+        transform: scale(1.05, 1.05);
+        background: #a7a7cc;
+        transition: all 0.3s ease-in;
+    }
+    outline:none;
+}
 

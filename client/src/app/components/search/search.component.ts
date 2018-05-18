@@ -3,7 +3,6 @@ import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { SearchService } from "../../services/search.service";
 import { ShopService } from "../../services/shop.service";
-import { QueryState_ } from "@angular/core/src/render3/query";
 import {
   FormBuilder,
   FormGroup,
@@ -18,7 +17,7 @@ import {
   styleUrls: ["./search.component.scss"]
 })
 export class SearchComponent implements OnInit {
-  shopFormControl = new FormControl("", [
+  queryFormControl = new FormControl("", [
     Validators.required,
     Validators.minLength(3)
   ]);
