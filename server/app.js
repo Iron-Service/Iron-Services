@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 
 mongoose.Promise = Promise;
 mongoose
-  .connect("mongodb://localhost/server", { useMongoClient: true })
+  .connect( process.env.MONGODB_URI, { useMongoClient: true })
   .then(() => {
     console.log("Connected to Mongo!");
   })
@@ -47,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
   session({
-    secret: "cats",
+    secret: "Iron-Services",
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({
@@ -89,7 +89,9 @@ app.use(flash());
 
 require("./routes/routes")(app);
 
-
+app.use((req, res) => {
+  res.sendfile(__dirname + '/public/index.html');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

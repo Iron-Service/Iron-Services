@@ -3,6 +3,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from "rxjs/Rx";
 import { Http, Response } from "@angular/http";
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
 
   signUp(user) {
     return this.http
-      .post(`${this.BASE_URL}/api/auth/signup`, user, this.options)
+      .post(`${environment.BASE_URL}/api/auth/signup`, user, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
       .catch(this.handleError);
@@ -36,7 +37,7 @@ export class AuthService {
 
   logIn(username, password) {
     return this.http
-      .post(`${this.BASE_URL}/api/auth/login`, {username, password}, this.options)
+      .post(`${environment.BASE_URL}/api/auth/login`, {username, password}, this.options)
       .map(res => res.json())
       .map(user =>  this.handleUser(user))
       .catch(this.handleError);
@@ -44,7 +45,7 @@ export class AuthService {
 
   logOut() {
     return this.http
-      .get(`${this.BASE_URL}/api/auth/logout`, this.options)
+      .get(`${environment.BASE_URL}/api/auth/logout`, this.options)
       .map(res => res.json())
       .map(() => this.handleUser())
       .catch(this.handleError);
@@ -52,7 +53,7 @@ export class AuthService {
 
   isLoggedIn() {
     return this.http
-      .get(`${this.BASE_URL}/api/auth/loggedin`, this.options)
+      .get(`${environment.BASE_URL}/api/auth/loggedin`, this.options)
       .map(res => res.json())
       .map(user => this.handleUser(user))
       .catch(this.handleError);
