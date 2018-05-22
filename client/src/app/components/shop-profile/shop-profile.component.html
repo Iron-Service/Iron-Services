@@ -12,13 +12,13 @@
       <mat-card class="col-md-4">
         <mat-card-title>Services</mat-card-title>
         <mat-list role="list">
-          <mat-list-item class="row " role="listitem" *ngFor="let service of shop.serviceList">
-            <strong>{{service.name}}</strong>
-            <span>
+          <mat-list-item class="row justify-content-between" role="listitem" *ngFor="let service of shop.serviceList">
+            <div> <strong>{{service.name}}</strong></div>
+            <div class="price">
               <span>{{service.priceMin}}</span>
               <span *ngIf="priceMax">- {{service.priceMax}}</span>
               <span> EUR</span>
-            </span>
+            </div>
           </mat-list-item>
         </mat-list>
       </mat-card>

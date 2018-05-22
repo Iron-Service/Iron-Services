@@ -30,7 +30,7 @@
 
         </div>
         <div class="d-flex justify-content-end">
-          <button mat-button matStepperNext type="button">Next</button>
+          <button mat-button matStepperNext type="button" [disabled]="shopForm.invalid">Next</button>
         </div>
       </mat-step>
       <mat-step label="Services">
@@ -56,12 +56,12 @@
         </div>
         <div class="d-flex justify-content-between">
           <button mat-button matStepperPrevious type="button">Back</button>
-          <button mat-button matStepperNext type="button">Next</button>
+          <button mat-button matStepperNext type="button" [disabled]="shopForm.invalid">Next</button>
         </div>
       </mat-step>
       <mat-step label="Opening Hours">
         <div *ngFor="let day of date;let i = index" class="d-flex flex-wrap justify-content-start">
-          <div class="d-flex">
+          <div class="d-flex col-4">
             <mat-checkbox name="date[{{i}}].open" [value]="date[i].open" [(ngModel)]="date[i].open">{{date[i].name}}</mat-checkbox>
             <mat-checkbox *ngIf="date[i].open" name="date[{{i}}].evening" [value]="date[i].evening.value" [(ngModel)]="date[i].evening">Split service </mat-checkbox>
           </div>

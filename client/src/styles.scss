@@ -7,7 +7,14 @@
     font-family: 'Abel';
     src: url('./assets/fonts/abel-regular.ttf');
 }
+@font-face { 
+    font-family: 'Poetsen';
+    src: url('./assets/fonts/PoetsenOne-Regular.otf')
+}
 
+h1{
+    font-family: 'Poetsen'
+}
 
 body {
     font-family: 'Abel', sans-serif;

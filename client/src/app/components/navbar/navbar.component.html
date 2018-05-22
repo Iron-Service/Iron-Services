@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-md justify-content-around navbar-sticky-top col-lg-8 offset-lg-2 bg-light">
     <button class="back" (click)="backClicked()">Go Back</button>
         <div class="row">
-            <a class="navbar-brand"><img class="navbar-brand" src="../../../assets/images/logo.png" class="logo" alt="logo"></a>
+            <a class="navbar-brand"><img class="navbar-brand" src="../../../assets/images/logo.png" class="logo" alt="logo">
+               </a>
             <ul class="nav navbar-nav" routerLinkActive="active">
                 <li class="nav-item" *ngIf="router.url!=='/search'&&router.url!==''">
                     <a class="nav-link" routerLink="search">Search</a>

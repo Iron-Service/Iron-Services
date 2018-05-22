@@ -23,7 +23,6 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
 
   const shop = { name, direction, description, serviceType, serviceList, date };
   Shop.findOne({ "direction.address": shop.direction.address }).then(shops => {
-    console.log(shop, shops);
     if (shops && shops.direction.address === shop.direction.address)
       return res.status(400).json({
         message: `There's already a shop at ${shop.direction.address} place.`
@@ -37,6 +36,7 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
       const serviceList = serviceType.serviceList;
       for (let i = 0, len = newShop.length; i < len; i++) {
         for (let j = 0, len2 = serviceList.length; j < len2; j++) {
+          console.log(newShop[i])
           if (newShop[i].name === serviceList[j].name) {
             if (cont.indexOf(newShop[i]) != -1) cont.push("err");
             if(newShop[i].priceMax == 0) newShop[i].priceMax = newShop[i].priceMin;
@@ -47,7 +47,7 @@ router.post("/create", ensureLogedIn("Error"), (req, res) => {
 
       }
       if (cont.length < 3 || cont.indexOf("err") != -1)
-        return res.status(404).json({ message: "ListService error" });
+        return res.status(500).json({ message: "ListService error" });
       Shop.create(shop, (err, arrayShop) => {
         if (err)
           return res.status(402).json({ message: `Shop ${shop.name} error.` });

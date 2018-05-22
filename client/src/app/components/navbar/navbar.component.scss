@@ -7,3 +7,23 @@
   top:0;
   height: 76px;
 }
+nav{
+  background-color:indigo !important;
+  color:white;
+  font-weight: 700;
+  a{
+    font-family: 'Poetsen';
+    color:white;
+    font-size: 18px;
+  }
+}
+.nav-item{
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  transition: all 0.3s ease-in;
+  &:hover{
+    background: rgb(136, 72, 182);
+    transform:scale(1.15, 1.15)
+  }
+}

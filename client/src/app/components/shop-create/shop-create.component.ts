@@ -35,8 +35,8 @@ interface ShopList {
   serviceList: Array<Object>;
   serviceType: String;
   updated_at: String;
-  __v?: Number
-  _id?: String
+  __v?: Number;
+  _id?: String;
 }
 
 @Component({
@@ -59,11 +59,11 @@ export class ShopCreateComponent implements OnInit {
   description: String;
   serviceType: ServiceType;
   serviceList: Array<ServiceList> = [];
-  price:Array<Number> =[];
-  priceMax:Array<Number>=[];
-  priceRange:  Array<Boolean> = [false];
+  price: Array<Number> = [];
+  priceMax: Array<Number> = [];
+  priceRange: Array<Boolean> = [false];
   // Services data we get from backend
-  shopList: Array<ShopList>
+  shopList: Array<ShopList>;
   list: any;
 
   date: Array<Date> = [
@@ -182,24 +182,24 @@ export class ShopCreateComponent implements OnInit {
   }
   submit(shopForm) {
     const obj = shopForm.form.value;
-    
     const { name, description, serviceType } = shopForm.form.value;
     let newserviceList = [];
+
     for (let i = 0; i < this.serviceList.length; i++) {
-      if(this.serviceList[i].priceMin != 0) newserviceList.push(this.serviceList[i])
+      if (this.serviceList[i].priceMin != 0)
+        newserviceList.push(this.serviceList[i]);
     }
     let cont = 0;
     let serviceList = [];
-    
     for (let key in obj) {
-      if (obj[key] == true && key.indexOf("date") === -1){    
+      if (obj[key] == true && key.indexOf("date") === -1  && key.indexOf("priceRange")=== -1) {
+        console.log(key)
         newserviceList[cont].name = key;
-        serviceList.push(newserviceList[cont])
+        serviceList.push(newserviceList[cont]);
         cont++;
       }
     }
-    const date = this.date
-    console.log(date)
+    const date = this.date;
     const direction = this.Direction;
     const newShop = {
       name,
@@ -209,27 +209,24 @@ export class ShopCreateComponent implements OnInit {
       serviceList,
       date
     };
-    console.log(newShop)
     this.shopService.createShop(newShop).subscribe(query => {
       this.shopData = query;
-      this.router.navigate(['/profile']);
-
+      this.router.navigate(["/profile"]);
     });
   }
   direction(event) {
     this.Direction = event;
   }
-  supplyValues(event){
-    this.serviceList=[];
-    console.log(event)
-    console.log(this.shopList)
+  supplyValues(event) {
+    this.serviceList = [];
     for (let i = 0; i < this.shopList.length; i++) {
-      console.log(this.shopList[i].serviceType == event[0])
-      if(this.shopList[i].serviceType == event[0]){
+      if (this.shopList[i].serviceType == event[0]) {
         for (let j = 0; j < this.shopList[i].serviceList.length; j++) {
-          this.serviceList.push({priceMin: 0, priceMax: 0, name:""})      
-        } break;}
+          this.serviceList.push({priceMin: 0, priceMax: 0, name:""});
+        }
+        break;
+      }
     }
-    console.log(this.serviceList)
+    console.log(this.serviceList);
   }
 }

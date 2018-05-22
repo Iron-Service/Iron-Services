@@ -34,6 +34,9 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit() {
     
   }
+  addComment(){
+    
+  }
 
 
 
