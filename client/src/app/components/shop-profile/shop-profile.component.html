@@ -32,12 +32,10 @@
       <mat-list role="list">
         <mat-list-item role="listitem" *ngFor="let comment of shop.comments">
           <div *ngIf="authService.user">
-            <button (click)="votedComment(comment._id, 1)">+1</button> <button (click)="votedComment(comment._id, 2)">-1</button>
+            <button (click)="votedComment(comment._id, 1)"><mat-icon svgIcon="thumbs-up"></mat-icon></button> 
+            <button (click)="votedComment(comment._id, 2)"><mat-icon svgIcon="thumbs-down"></mat-icon></button>
           </div>
           {{comment._author.username}} ( {{comment.created_at | date: "short"}} ) : {{comment.content}} / {{comment.value}}
-          <!-- ICONS -->
-          <!-- <mat-icon svgIcon="thumbs-up">{{comment.evalueesPositive}}</mat-icon>
-              <mat-icon svgIcon="thumbs-down">{{comment.evalueesNegative}}</mat-icon> -->
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
